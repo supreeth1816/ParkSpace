@@ -9,7 +9,20 @@ class ParkspaceApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
 
-      home: ,
+      home: StartScreen(),
+    );
+  }
+}
+
+
+class StartScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: Center(
+        child: Text("Parkspace App"),
+      ),
     );
   }
 }
