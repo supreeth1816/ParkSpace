@@ -42,7 +42,6 @@ class ParkspaceApp extends StatelessWidget {
   }
 }
 
-
 class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
