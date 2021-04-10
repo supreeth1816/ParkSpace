@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-class ParkingVendorScreen extends StatelessWidget {
+class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
