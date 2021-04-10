@@ -19,9 +19,20 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
 
-      body: Center(
-        child: Text("Parkspace App"),
+      body: Container(
+        padding: EdgeInsets.fromLTRB(60, 100, 0, 0),
+
+        child: Column(
+
+          children: [
+            Image.asset('assets/Logo.png',
+              width: 300,
+
+            ),
+          ],
+        ),
       ),
     );
   }
