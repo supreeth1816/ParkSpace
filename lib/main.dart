@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'ParkingVendorScreen.dart';
 import 'UserScreen.dart';
+import 'package:geolocator/geolocator.dart';
+import 'place.dart';
+import 'services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -12,16 +16,28 @@ void main() {
 class ParkspaceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        FutureProvider(create: (context) => GeoLocatorService().getLocation()),
+        ProxyProvider<Position,Future<List<Place>>>(
+          update: (context,position,places){
+            return (position !=null) ? PlacesService().getPlaces(position.latitude, position.longitude) :null;
+          },
+        )
+      ],
 
-      debugShowCheckedModeBanner: false,
-      home: StartScreen(),
 
-      routes: {
+      child: MaterialApp(
 
-        '/vendor': (context) => ParkingVendorScreen(),
-        '/user': (context) => UserScreen(),
-      },
+        debugShowCheckedModeBanner: false,
+        home: StartScreen(),
+
+        routes: {
+
+          '/vendor': (context) => ParkingVendorScreen(),
+          '/user': (context) => UserScreen(),
+        },
+      ),
     );
   }
 }
@@ -64,8 +80,13 @@ class StartScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 150,),
-            PrimaryButton(
-              btnText: "Login as User",
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/user');
+              },
+              child: PrimaryButton(
+                btnText: "Login as User",
+              ),
             ),
             SizedBox(
               height: 20,
