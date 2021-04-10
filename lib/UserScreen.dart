@@ -16,36 +16,44 @@ class UserScreen extends StatelessWidget {
         body: (currentPosition != null)
             ? Consumer<List<Place>>(
           builder: (_, places, __) {
-            return Column(
-              children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.height / 3,
-                  width: MediaQuery.of(context).size.width,
-                  child: GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                        // target: LatLng(currentPosition.latitude,
-                        //     currentPosition.longitude),
-                        target: LatLng(17.3850,
-                            78.4867),
-                        zoom: 16.0),
-                    zoomGesturesEnabled: true,
+            return SafeArea(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 20,),
+                  Text("Parking Slot Locator",
+                  style: TextStyle(
+                    fontSize: 24
+                  ),),
+                  SizedBox(height: 10,),
+                  Container(
+                    height: MediaQuery.of(context).size.height - 92,
+                    width: MediaQuery.of(context).size.width,
+                    child: GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                          // target: LatLng(currentPosition.latitude,
+                          //     currentPosition.longitude),
+                          target: LatLng(17.3850,
+                              78.4867),
+                          zoom: 16.0),
+                      zoomGesturesEnabled: true,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: places.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            title: Text(places[index].name),
-                          ),
-                        );
-                      }),
-                )
-              ],
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: places.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: ListTile(
+                              title: Text(places[index].name),
+                            ),
+                          );
+                        }),
+                  )
+                ],
+              ),
             );
           },
         )
