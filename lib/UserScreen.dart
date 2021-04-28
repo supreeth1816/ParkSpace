@@ -3,12 +3,61 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'place.dart';
+import 'package:flutter/services.dart';
 
-class UserScreen extends StatelessWidget {
+class UserScreen extends StatefulWidget {
+  @override
+  _UserScreenState createState() => _UserScreenState();
+}
+
+class _UserScreenState extends State<UserScreen> {
+
+  GoogleMapController _controller;
+  bool isMapCreated = false;
+  static final LatLng myLocation = LatLng(37.42796133580664, -122.085749655962);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final CameraPosition _kGooglePlex = CameraPosition(
+    target: myLocation,
+    zoom: 14.4746,
+  );
+
+  Set<Marker> _createMarker() {
+    return <Marker>[
+      Marker(
+          markerId: MarkerId("marker_1"),
+          position: myLocation,
+          icon: BitmapDescriptor.defaultMarkerWithHue(
+            BitmapDescriptor.hueOrange,
+          )),
+    ].toSet();
+  }
+
+  getMapStyle() {
+
+      getJsonFile("assets/map_style.json").then(setMapStyle);
+
+  }
+
+  Future<String> getJsonFile(String path) async {
+    return await rootBundle.loadString(path);
+  }
+
+  void setMapStyle(String mapStyle) {
+    _controller.setMapStyle(mapStyle);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final currentPosition = Provider.of<Position>(context);
     final placesProvider = Provider.of<Future<List<Place>>>(context);
+
+
 
     return FutureProvider(
       create: (context) => placesProvider,
