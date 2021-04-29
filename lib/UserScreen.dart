@@ -72,7 +72,7 @@ class _UserScreenState extends State<UserScreen> {
           backgroundColor: Colors.white,
 
           leading: Icon(
-            Icons.arrow_back_ios,
+            Icons.menu,
             color: Colors.deepPurple,
 
           ),
