@@ -16,7 +16,7 @@ class _UserScreenState extends State<UserScreen> {
 
   GoogleMapController _controller;
   bool isMapCreated = false;
-  static final LatLng myLocation = LatLng(17.3850, 78.4867);
+  static final LatLng myLocation = LatLng(12.9717, 79.1594);
 
   String _mapStyle;
 
@@ -28,7 +28,7 @@ class _UserScreenState extends State<UserScreen> {
 
   final CameraPosition _kGooglePlex = CameraPosition(
     target: myLocation,
-    zoom: 14.4746,
+    zoom: 16.4746,
   );
 
   Set<Marker> _createMarker() {

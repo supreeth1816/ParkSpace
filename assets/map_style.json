@@ -13,9 +13,7 @@
       {
         "color": "#333333"
       },
-      {
-        "saturation": 36
-      },
+
       {
         "lightness": 40
       }
@@ -127,6 +125,25 @@
       },
       {
         "lightness": 21
+      }
+    ]
+  },
+
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
