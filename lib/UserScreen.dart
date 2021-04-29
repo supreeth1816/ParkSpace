@@ -59,19 +59,13 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentPosition = Provider.of<Position>(context);
-    final placesProvider = Provider.of<Future<List<Place>>>(context);
+
     if (isMapCreated) {
       getMapMode();
     }
 
-    return FutureProvider(
-      create: (context) => placesProvider,
-      child: Scaffold(
-        body: (currentPosition != null)
-            ? Consumer<List<Place>>(
-          builder: (_, places, __) {
-            return SafeArea(
+    return Scaffold(
+        body: SafeArea(
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20,),
@@ -85,6 +79,8 @@ class _UserScreenState extends State<UserScreen> {
                     width: MediaQuery.of(context).size.width,
 
                     child: GoogleMap(
+
+                      trafficEnabled: true,
                       mapType: MapType.normal,
                       zoomControlsEnabled: true,
                       myLocationButtonEnabled: true,
@@ -110,38 +106,28 @@ class _UserScreenState extends State<UserScreen> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: places.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              title: Text(places[index].name),
-                            ),
-                          );
-                        }),
-                  )
+
                 ],
               ),
-            );
-          },
-        )
-            : Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height / 3,
-            width: MediaQuery.of(context).size.width,
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(17.3850,
-                      78.4867),
-                  zoom: 16.0),
-              zoomGesturesEnabled: true,
             ),
-          ),
-            ),
-          ),
-
-
     );
+
+  //           : Center(
+  //         child: Container(
+  //           height: MediaQuery.of(context).size.height / 3,
+  //           width: MediaQuery.of(context).size.width,
+  //           child: GoogleMap(
+  //             initialCameraPosition: CameraPosition(
+  //                 target: LatLng(17.3850,
+  //                     78.4867),
+  //                 zoom: 16.0),
+  //             zoomGesturesEnabled: true,
+  //           ),
+  //         ),
+  //           ),
+  //         ),
+  //
+  //
+  // //);
   }
 }

@@ -16,15 +16,30 @@ void main() {
 class ParkspaceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
+    return MaterialApp(
+
+        debugShowCheckedModeBanner: false,
+        home: StartScreen(),
+
+        routes: {
+
+          '/vendor': (context) => ParkingVendorScreen(),
+          '/user': (context) => UserScreen(),
+        },
+      );
+
+
+
+
     return MultiProvider(
-      providers: [
-        FutureProvider(create: (context) => GeoLocatorService().getLocation()),
-        ProxyProvider<Position,Future<List<Place>>>(
-          update: (context,position,places){
-            return (position !=null) ? PlacesService().getPlaces(position.latitude, position.longitude) :null;
-          },
-        )
-      ],
+      // providers: [
+      //   FutureProvider(create: (context) => GeoLocatorService().getLocation()),
+      //   // ProxyProvider<Position,Future<List<Place>>>(
+      //   //   update: (context,position,places){
+      //   //     return (position !=null) ? PlacesService().getPlaces(position.latitude, position.longitude) :null;
+      //   //   },
+      //   // )
+      // ],
 
 
       child: MaterialApp(
