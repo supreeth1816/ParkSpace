@@ -65,15 +65,26 @@ class _UserScreenState extends State<UserScreen> {
     }
 
     return Scaffold(
+
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("ParkSpace", style: TextStyle(color: Colors.deepPurple),),
+          backgroundColor: Colors.white,
+
+          leading: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.deepPurple,
+
+          ),
+
+          shadowColor: Colors.white,
+          elevation: 0,
+
+        ),
         body: SafeArea(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 20,),
-                  Text("Parking Slot Locator",
-                  style: TextStyle(
-                    fontSize: 24
-                  ),),
-                  SizedBox(height: 10,),
+
                   Container(
                     height: MediaQuery.of(context).size.height - 92,
                     width: MediaQuery.of(context).size.width,
