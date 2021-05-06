@@ -172,20 +172,37 @@ class _UserScreenState extends State<UserScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Icon(Icons.search, color: Colors.blueAccent,),
-                                        SizedBox(width: 10,),
-                                        Container(
-                                              width: 250,
-                                              child: TextField(
-                                                decoration: InputDecoration(
-                                                  hintText: "Where do you go?",
-                                                  border: InputBorder.none,
-                                                ),
-                                              ),
-                                            ),
+                                        SizedBox(width: 10),
+                                        // Container(
+                                        //       width: 250,
+                                        //       child: TextField(
+                                        //         decoration: InputDecoration(
+                                        //           hintText: "Where do you go?",
+                                        //           border: InputBorder.none,
+                                        //         ),
+                                        //       ),
+                                        //     ),
                                       ],
                                         ),
                               ),
                             ),
+
+                            Positioned(
+                              left: 62.0,
+                              right: 10.0,
+                              top: 17.0,
+                              child: Container(
+                                      width: 250,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          hintText: "Where do you go?",
+                                          border: InputBorder.none,
+                                        ),
+                                      ),
+                                    ),
+
+                                ),
+
 
 
 
