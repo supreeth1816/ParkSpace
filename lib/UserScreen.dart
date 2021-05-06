@@ -45,12 +45,10 @@ class _UserScreenState extends State<UserScreen> {
 
   }
 
-
   bool isMapCreated = false;
 
   //default location
-  static final LatLng myLocation = LatLng(12.9717, 79.1594);
-
+  static final LatLng myLocation = LatLng(13.9717, 79.1594);
 
   @override
   void initState() {
@@ -91,6 +89,11 @@ class _UserScreenState extends State<UserScreen> {
     _controller.setMapStyle(mapStyle);
   }
 
+  searchAndNavigate(){
+      print(searchAddress);
+      _controller.animateCamera(CameraUpdate.newCameraPosition(_kGooglePlex));
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -126,6 +129,9 @@ class _UserScreenState extends State<UserScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: Stack(
                           children: [
+
+                            // Google Map
+
                             GoogleMap(
 
                               trafficEnabled: true,
@@ -173,15 +179,6 @@ class _UserScreenState extends State<UserScreen> {
                                       children: [
                                         Icon(Icons.search, color: Colors.blueAccent,),
                                         SizedBox(width: 10),
-                                        // Container(
-                                        //       width: 250,
-                                        //       child: TextField(
-                                        //         decoration: InputDecoration(
-                                        //           hintText: "Where do you go?",
-                                        //           border: InputBorder.none,
-                                        //         ),
-                                        //       ),
-                                        //     ),
                                       ],
                                         ),
                               ),
@@ -198,10 +195,18 @@ class _UserScreenState extends State<UserScreen> {
                                         onTap: (){
                                           print("Text field is tapped");
                                         },
+
+                                        onChanged: (val){
+
+                                          // print("Value changed : ");
+                                          // print(searchAddress);
+                                          setState(() {
+                                            searchAddress = val;
+                                          });
+                                        },
                                         decoration: InputDecoration(
                                           hintText: "Where do you go?",
                                           border: InputBorder.none,
-
 
                                           suffix: GestureDetector(
                                               child: Text("Search",
@@ -210,9 +215,7 @@ class _UserScreenState extends State<UserScreen> {
                                                 fontSize: 14.0,
                                                 fontWeight: FontWeight.bold
                                               ),),
-                                            onTap: (){
-                                                print("Suffix Tapped");
-                                            },
+                                            onTap: searchAndNavigate,
                                           ),
                                         ),
                                       ),
@@ -220,8 +223,7 @@ class _UserScreenState extends State<UserScreen> {
 
                                 ),
 
-
-
+                          //Bottom Tabs
 
                             Positioned(
                                 left: 10.0,
@@ -247,7 +249,6 @@ class _UserScreenState extends State<UserScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(height: 15.0,),
-
                                   ],
                                 ),
                               ),
@@ -266,22 +267,6 @@ class _UserScreenState extends State<UserScreen> {
             ),
     );
 
-  //           : Center(
-  //         child: Container(
-  //           height: MediaQuery.of(context).size.height / 3,
-  //           width: MediaQuery.of(context).size.width,
-  //           child: GoogleMap(
-  //             initialCameraPosition: CameraPosition(
-  //                 target: LatLng(17.3850,
-  //                     78.4867),
-  //                 zoom: 16.0),
-  //             zoomGesturesEnabled: true,
-  //           ),
-  //         ),
-  //           ),
-  //         ),
-  //
-  //
-  // //);
+
   }
 }
