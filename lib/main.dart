@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'ParkingVendorScreen.dart';
 import 'UserScreen.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:geolocator/geolocator.dart';
 import 'place.dart';
 import 'services.dart';
 import 'package:provider/provider.dart';
@@ -80,9 +81,9 @@ class StartScreen extends StatelessWidget {
 
             Text("ParkSpace",
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.w500,
-                color: Colors.black87
+                color: Colors.black87,
               ),
             ),
             SizedBox(height: 5,),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:provider/provider.dart';
-import 'package:geolocator/geolocator.dart';
+//import 'package:geolocator/geolocator.dart';
 import 'place.dart';
 import 'package:flutter/services.dart';
 
@@ -14,11 +15,13 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
 
+  //initialising the controller for google map
   GoogleMapController _controller;
   bool isMapCreated = false;
+
+  //default location
   static final LatLng myLocation = LatLng(12.9717, 79.1594);
 
-  String _mapStyle;
 
   @override
   void initState() {
@@ -26,6 +29,7 @@ class _UserScreenState extends State<UserScreen> {
 
   }
 
+  //zoom for the default location
   final CameraPosition _kGooglePlex = CameraPosition(
     target: myLocation,
     zoom: 16.4746,
@@ -33,6 +37,8 @@ class _UserScreenState extends State<UserScreen> {
 
   Set<Marker> _createMarker() {
     return <Marker>[
+
+      //Marker for default point in Google Map
       Marker(
           markerId: MarkerId("marker_1"),
           position: myLocation,
@@ -42,16 +48,15 @@ class _UserScreenState extends State<UserScreen> {
     ].toSet();
   }
 
+  //Setting Map Style
   getMapMode() {
-
-      getJsonFile("assets/map_style.json").then(setMapStyle);
-
+    getJsonFile("assets/map_style.json").then(setMapStyle);
   }
+
 
   Future<String> getJsonFile(String path) async {
     return await rootBundle.loadString(path);
   }
-
 
   void setMapStyle(String mapStyle) {
     _controller.setMapStyle(mapStyle);
@@ -84,34 +89,94 @@ class _UserScreenState extends State<UserScreen> {
         body: SafeArea(
               child: Column(
                 children: <Widget>[
-
                   Container(
                     height: MediaQuery.of(context).size.height - 92,
                     width: MediaQuery.of(context).size.width,
+                    child: Stack(
+                      children: [
+                        GoogleMap(
+                          trafficEnabled: true,
+                          mapType: MapType.normal,
+                          zoomControlsEnabled: false,
+                          myLocationButtonEnabled: false,
+                          myLocationEnabled: true,
+                          markers: _createMarker(),
 
-                    child: GoogleMap(
+                          initialCameraPosition: _kGooglePlex,
+                          onMapCreated: (GoogleMapController controller) {
+                            _controller = controller;
+                            isMapCreated = true;
+                            getMapMode();
+                            setState(() {});
+                          },
+                          zoomGesturesEnabled: true,
+                        ),
 
-                      trafficEnabled: true,
-                      mapType: MapType.normal,
-                      zoomControlsEnabled: true,
-                      myLocationButtonEnabled: true,
-                      myLocationEnabled: true,
-                      markers: _createMarker(),
+                        Positioned(
+                          left: 10.0,
+                          right: 10.0,
+                          top: 10.0,
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                            height: 54.0,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 40.0,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
 
+                                Text("Where do you go?",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500
+                                  ),),
+                              ],
+                            ),
+                          ),
+                        ),
 
-
-
-                      initialCameraPosition: _kGooglePlex,
-
-                      onMapCreated: (GoogleMapController controller) {
-                        _controller = controller;
-                        isMapCreated = true;
-                        getMapMode();
-                        setState(() {});
-                      },
-
-
-                      zoomGesturesEnabled: true,
+                        Positioned(
+                            left: 10.0,
+                            right: 10.0,
+                            bottom: 5.0,
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                            height: 120.0,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 40.0,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 15.0,),
+                                Text("Select parking slot",
+                                  style: TextStyle(
+                                  fontWeight: FontWeight.w500
+                                ),),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
