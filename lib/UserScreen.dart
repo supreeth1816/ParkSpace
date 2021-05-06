@@ -1,22 +1,49 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:provider/provider.dart';
-//import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart';
 import 'place.dart';
 import 'package:flutter/services.dart';
 
 class UserScreen extends StatefulWidget {
   @override
   _UserScreenState createState() => _UserScreenState();
-
-
 }
 
 class _UserScreenState extends State<UserScreen> {
 
   //initialising the controller for google map
+  Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController _controller;
+
+  Position currentPosition;
+  var geoLocator = Geolocator();
+
+  void locatePosition() async
+  {
+
+    //position is method variable
+    //currentPosition is file variable
+    //getting position through inbuilt method of geolocator class
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    currentPosition = position;
+    LatLng myPos = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition = CameraPosition(
+        target: myPos,
+        zoom: 16.4746);
+    
+    _controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+
+  }
+
+
   bool isMapCreated = false;
 
   //default location
@@ -95,27 +122,32 @@ class _UserScreenState extends State<UserScreen> {
                     child: Stack(
                       children: [
                         GoogleMap(
+
                           trafficEnabled: true,
                           mapType: MapType.normal,
-                          zoomControlsEnabled: false,
+                          zoomControlsEnabled: true,
                           myLocationButtonEnabled: false,
                           myLocationEnabled: true,
+                          zoomGesturesEnabled: true,
                           markers: _createMarker(),
 
                           initialCameraPosition: _kGooglePlex,
                           onMapCreated: (GoogleMapController controller) {
+
+                            _controllerGoogleMap.complete(controller);
                             _controller = controller;
                             isMapCreated = true;
+                            locatePosition();
                             getMapMode();
                             setState(() {});
                           },
-                          zoomGesturesEnabled: true,
+
                         ),
 
                         Positioned(
                           left: 10.0,
                           right: 10.0,
-                          top: 10.0,
+                          top: 14.0,
                           child: Container(
                             padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
                             height: 54.0,
@@ -136,10 +168,18 @@ class _UserScreenState extends State<UserScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
 
-                                Text("Where do you go?",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500
-                                  ),),
+                                Row(
+                                  children: [
+                                    Icon(Icons.search, color: Colors.blueAccent,),
+                                    SizedBox(width: 10,),
+                                    Text("Where do you go?",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                        color: Colors.black87,
+                                        fontSize: 15,
+                                      ),),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -150,8 +190,9 @@ class _UserScreenState extends State<UserScreen> {
                             right: 10.0,
                             bottom: 5.0,
                           child: Container(
+
                             padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                            height: 120.0,
+                            height: 90.0,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
@@ -168,10 +209,7 @@ class _UserScreenState extends State<UserScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(height: 15.0,),
-                                Text("Select parking slot",
-                                  style: TextStyle(
-                                  fontWeight: FontWeight.w500
-                                ),),
+
                               ],
                             ),
                           ),
