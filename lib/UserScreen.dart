@@ -19,6 +19,8 @@ class _UserScreenState extends State<UserScreen> {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController _controller;
 
+  String searchAddress;
+
   Position currentPosition;
   var geoLocator = Geolocator();
 
@@ -114,114 +116,118 @@ class _UserScreenState extends State<UserScreen> {
 
         ),
         body: SafeArea(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height - 92,
-                    width: MediaQuery.of(context).size.width,
-                    child: Stack(
-                      children: [
-                        GoogleMap(
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: MediaQuery.of(context).size.height - 92,
+                        width: MediaQuery.of(context).size.width,
+                        child: Stack(
+                          children: [
+                            GoogleMap(
 
-                          trafficEnabled: true,
-                          mapType: MapType.normal,
-                          zoomControlsEnabled: true,
-                          myLocationButtonEnabled: false,
-                          myLocationEnabled: true,
-                          zoomGesturesEnabled: true,
-                          markers: _createMarker(),
+                              trafficEnabled: true,
+                              mapType: MapType.normal,
+                              zoomControlsEnabled: true,
+                              myLocationButtonEnabled: false,
+                              myLocationEnabled: true,
+                              zoomGesturesEnabled: true,
+                              markers: _createMarker(),
 
-                          initialCameraPosition: _kGooglePlex,
-                          onMapCreated: (GoogleMapController controller) {
+                              initialCameraPosition: _kGooglePlex,
+                              onMapCreated: (GoogleMapController controller) {
 
-                            _controllerGoogleMap.complete(controller);
-                            _controller = controller;
-                            isMapCreated = true;
-                            locatePosition();
-                            getMapMode();
-                            setState(() {});
-                          },
+                                _controllerGoogleMap.complete(controller);
+                                _controller = controller;
+                                isMapCreated = true;
+                                locatePosition();
+                                getMapMode();
+                                setState(() {});
+                              },
 
-                        ),
-
-                        Positioned(
-                          left: 10.0,
-                          right: 10.0,
-                          top: 14.0,
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                            height: 54.0,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15.0),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 40.0,
-                                ),
-                              ],
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
 
-                                Row(
-                                  children: [
-                                    Icon(Icons.search, color: Colors.blueAccent,),
-                                    SizedBox(width: 10,),
-                                    Text("Where do you go?",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                        color: Colors.black87,
-                                        fontSize: 15,
-                                      ),),
+                            Positioned(
+                              left: 10.0,
+                              right: 10.0,
+                              top: 14.0,
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                                height: 54.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15.0),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 40.0,
+                                    ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        Positioned(
-                            left: 10.0,
-                            right: 10.0,
-                            bottom: 5.0,
-                          child: Container(
-
-                            padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                            height: 90.0,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15.0),
+                                child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.search, color: Colors.blueAccent,),
+                                        SizedBox(width: 10,),
+                                        Container(
+                                              width: 250,
+                                              child: TextField(
+                                                decoration: InputDecoration(
+                                                  hintText: "Where do you go?",
+                                                  border: InputBorder.none,
+                                                ),
+                                              ),
+                                            ),
+                                      ],
+                                        ),
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 40.0,
+                            ),
+
+
+
+                            Positioned(
+                                left: 10.0,
+                                right: 10.0,
+                                bottom: 5.0,
+                              child: Container(
+
+                                padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                                height: 90.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15.0),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 40.0,
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 15.0,),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 15.0,),
 
-                              ],
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
 
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
     );
