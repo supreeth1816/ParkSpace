@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'ParkingVendorScreen.dart';
 import 'UserScreen.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:geolocator/geolocator.dart';
-import 'place.dart';
-import 'services.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-
       ParkspaceApp());
 
 }
@@ -29,32 +23,6 @@ class ParkspaceApp extends StatelessWidget {
         },
       );
 
-
-
-
-    return MultiProvider(
-      // providers: [
-      //   FutureProvider(create: (context) => GeoLocatorService().getLocation()),
-      //   // ProxyProvider<Position,Future<List<Place>>>(
-      //   //   update: (context,position,places){
-      //   //     return (position !=null) ? PlacesService().getPlaces(position.latitude, position.longitude) :null;
-      //   //   },
-      //   // )
-      // ],
-
-
-      child: MaterialApp(
-
-        debugShowCheckedModeBanner: false,
-        home: StartScreen(),
-
-        routes: {
-
-          '/vendor': (context) => ParkingVendorScreen(),
-          '/user': (context) => UserScreen(),
-        },
-      ),
-    );
   }
 }
 
@@ -100,7 +68,7 @@ class StartScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/user');
               },
               child: PrimaryButton(
-                btnText: "Login as User",
+                btnText: "Login",
               ),
             ),
             SizedBox(
@@ -111,7 +79,7 @@ class StartScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/vendor');
                 },
               child: OutlineBtn(
-                btnText: "Login as Vendor",
+                btnText: "Sign Up",
               ),
             )
           ],
@@ -137,9 +105,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     return Container(
       decoration: BoxDecoration(
           color: Colors.deepPurple,
-          borderRadius: BorderRadius.circular(20)
+          borderRadius: BorderRadius.circular(15)
       ),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(15),
       child: Center(
         child: Text(
           widget.btnText,
@@ -170,9 +138,9 @@ class _OutlineBtnState extends State<OutlineBtn> {
               color: Colors.deepPurple,
               width: 2
           ),
-          borderRadius: BorderRadius.circular(23)
+          borderRadius: BorderRadius.circular(15)
       ),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(15),
       child: Center(
         child: Text(
           widget.btnText,

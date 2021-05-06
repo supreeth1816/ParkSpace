@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "796849055184",
+    "project_id": "parkspace-242a3",
+    "storage_bucket": "parkspace-242a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796849055184:android:362f6290528781437c85d5",
+        "android_client_info": {
+          "package_name": "com.supreeth1816.parkspace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796849055184-lnbguj7lpgai4rmdhso8p5pet86kfih4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.supreeth1816.parkspace",
+            "certificate_hash": "67c520aee5b048d9d87e05d675e2da35eb210162"
+          }
+        },
+        {
+          "client_id": "796849055184-1qt371kfk3hpi2t40nurua69tv6tii55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6sYJwFoLHB8EJmhkexeACJ7JX0ZEtsIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796849055184-1qt371kfk3hpi2t40nurua69tv6tii55.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
