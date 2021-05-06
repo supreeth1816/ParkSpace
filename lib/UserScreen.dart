@@ -48,7 +48,7 @@ class _UserScreenState extends State<UserScreen> {
   bool isMapCreated = false;
 
   //default location
-  static final LatLng myLocation = LatLng(13.9717, 79.1594);
+  static final LatLng myLocation = LatLng(12.9165, 79.1325);
 
   @override
   void initState() {
