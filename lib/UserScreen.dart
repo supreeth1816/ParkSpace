@@ -189,14 +189,31 @@ class _UserScreenState extends State<UserScreen> {
 
                             Positioned(
                               left: 62.0,
-                              right: 10.0,
+                              right: 30.0,
                               top: 17.0,
                               child: Container(
                                       width: 250,
                                       child: TextField(
+
+                                        onTap: (){
+                                          print("Text field is tapped");
+                                        },
                                         decoration: InputDecoration(
                                           hintText: "Where do you go?",
                                           border: InputBorder.none,
+
+
+                                          suffix: GestureDetector(
+                                              child: Text("Search",
+                                              style: TextStyle(
+                                                color: Colors.blueAccent,
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.bold
+                                              ),),
+                                            onTap: (){
+                                                print("Suffix Tapped");
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
