@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
-import 'place.dart';
+
 import 'package:flutter/services.dart';
 
 class UserScreen extends StatefulWidget {
@@ -19,11 +18,16 @@ class _UserScreenState extends State<UserScreen> {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController _controller;
 
+  Set<Marker> _markers = {};
+
   String searchAddress;
+  BitmapDescriptor parkingIcon;
 
   Position currentPosition;
   var geoLocator = Geolocator();
 
+
+  //Method called by clicking search button
   void locatePosition() async
   {
 
@@ -45,6 +49,7 @@ class _UserScreenState extends State<UserScreen> {
 
   }
 
+
   bool isMapCreated = false;
 
   //default location
@@ -56,11 +61,20 @@ class _UserScreenState extends State<UserScreen> {
 
   }
 
+
+
   //zoom for the default location
   final CameraPosition _kGooglePlex = CameraPosition(
     target: myLocation,
     zoom: 16.4746,
   );
+
+
+  void setCustomMapPin() async {
+    parkingIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'assets/destination_map_marker.png');
+  }
 
   Set<Marker> _createMarker() {
     return <Marker>[
@@ -266,7 +280,5 @@ class _UserScreenState extends State<UserScreen> {
               ),
             ),
     );
-
-
   }
 }

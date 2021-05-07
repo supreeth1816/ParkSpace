@@ -7,8 +7,8 @@
 
 
     <application
-        android:label="parkspace"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Parkspace"
+        android:icon="@mipmap/parkspace">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
