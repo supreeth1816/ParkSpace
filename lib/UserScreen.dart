@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:parkspace/models/pindata.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'package:flutter/services.dart';
@@ -21,13 +21,63 @@ class _UserScreenState extends State<UserScreen> {
   Set<Marker> _markers = {};
 
   String searchAddress;
-  BitmapDescriptor parkingIcon;
+
+  BitmapDescriptor _parkingIcon;
+
+
+  PinData _currentPinData = PinData(
+      pinPath: '',
+      avatarPath: '',
+      location: LatLng(0, 0),
+      locationName: '',
+      labelColor: Colors.grey);
+
+  PinData _sourcePinInfo;
+
+
+  Widget _buildLocationInfo() {
+
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(left: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              _currentPinData.locationName,
+            ),
+            Text(
+              'Latitude : ${_currentPinData.location.latitude}',
+            ),
+            Text(
+              'Longitude : ${_currentPinData.location.longitude}',
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
   Position currentPosition;
   var geoLocator = Geolocator();
 
 
-  //Method called by clicking search button
+  // Method to set parking map pin
+  // void setCustomMapPin() async {
+  //   parkingIcon = await BitmapDescriptor.fromAssetImage(
+  //       ImageConfiguration(devicePixelRatio: 2.5),
+  //       'assets/parkingIcon.png');
+  // }
+
+
+  void _setSourceIcon() async {
+    _parkingIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5), 'assets/parkingIcon.png');
+  }
+
+
+  //Method called when map is initialised
   void locatePosition() async
   {
 
@@ -53,15 +103,15 @@ class _UserScreenState extends State<UserScreen> {
   bool isMapCreated = false;
 
   //default location
-  static final LatLng myLocation = LatLng(12.9165, 79.1325);
+  static final LatLng myLocation = LatLng(12.9717, 79.1594);
 
   @override
   void initState() {
+
+    _setSourceIcon();
     super.initState();
 
   }
-
-
 
   //zoom for the default location
   final CameraPosition _kGooglePlex = CameraPosition(
@@ -70,22 +120,19 @@ class _UserScreenState extends State<UserScreen> {
   );
 
 
-  void setCustomMapPin() async {
-    parkingIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.5),
-        'assets/destination_map_marker.png');
-  }
-
   Set<Marker> _createMarker() {
     return <Marker>[
 
       //Marker for default point in Google Map
       Marker(
-          markerId: MarkerId("marker_1"),
+          markerId: MarkerId("Home"),
           position: myLocation,
-          icon: BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueMagenta,
-          )),
+          icon: _parkingIcon,
+          onTap: (){
+            setState(() {
+              _currentPinData = _sourcePinInfo;
+            });
+          }),
     ].toSet();
   }
 
@@ -108,6 +155,17 @@ class _UserScreenState extends State<UserScreen> {
       _controller.animateCamera(CameraUpdate.newCameraPosition(_kGooglePlex));
   }
 
+  void _setMapPins() {
+    _sourcePinInfo = PinData(
+        pinPath: 'assets/parkingIcon.png',
+        locationName: "My Location",
+
+
+        location: LatLng(12.9717, 79.1594),
+        avatarPath: "assets/parkingIcon.png",
+        labelColor: Colors.blue);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -117,15 +175,17 @@ class _UserScreenState extends State<UserScreen> {
 
     return Scaffold(
 
-        appBar: AppBar(
+      appBar: AppBar(
           centerTitle: true,
+
+          //AppBar Title
           title: Text("ParkSpace", style: TextStyle(color: Colors.deepPurple),),
           backgroundColor: Colors.white,
 
+          //Hamburger Menu icon
           leading: Icon(
             Icons.menu,
             color: Colors.deepPurple,
-
           ),
 
           shadowColor: Colors.white,
@@ -145,17 +205,14 @@ class _UserScreenState extends State<UserScreen> {
                           children: [
 
                             // Google Map
-
                             GoogleMap(
-
                               trafficEnabled: true,
                               mapType: MapType.normal,
                               zoomControlsEnabled: true,
                               myLocationButtonEnabled: false,
                               myLocationEnabled: true,
                               zoomGesturesEnabled: true,
-                              markers: _createMarker(),
-
+                              markers: _markers,
                               initialCameraPosition: _kGooglePlex,
                               onMapCreated: (GoogleMapController controller) {
 
@@ -164,7 +221,10 @@ class _UserScreenState extends State<UserScreen> {
                                 isMapCreated = true;
                                 locatePosition();
                                 getMapMode();
-                                setState(() {});
+                                _setMapPins();
+                                setState(() {
+
+                                });
                               },
 
                             ),
@@ -261,8 +321,8 @@ class _UserScreenState extends State<UserScreen> {
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(height: 15.0,),
+                                  children: <Widget>[
+                                    _buildLocationInfo(),
                                   ],
                                 ),
                               ),
@@ -282,3 +342,5 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 }
+
+
