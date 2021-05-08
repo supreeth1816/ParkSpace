@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,11 +20,48 @@ class _UserScreenState extends State<UserScreen> {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController _controller;
 
-  Set<Marker> _markers = {};
+  Set<Marker> _markers = {
+
+  };
+
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+  }
+
+
+
+
+  BitmapDescriptor mapMarker;
+
+  void setCustomMarker() async {
+    final Uint8List markerIcon = await getBytesFromAsset('assets/icon.png', 160);
+    mapMarker = await BitmapDescriptor.fromBytes(markerIcon);
+  }
+  //
+  // void setCustomMarker() async {
+  //   mapMarker = await BitmapDescriptor.fromAssetImage(
+  //       ImageConfiguration(), 'assets/icon.png');
+  // }
+
+
+
+
+  @override
+  void initState() {
+
+    setCustomMarker();
+    super.initState();
+
+  }
+
+
 
   String searchAddress;
 
-  BitmapDescriptor _parkingIcon;
 
 
   PinData _currentPinData = PinData(
@@ -33,6 +72,35 @@ class _UserScreenState extends State<UserScreen> {
       labelColor: Colors.grey);
 
   PinData _sourcePinInfo;
+
+  void _onMapCreated(GoogleMapController controller) {
+
+  _controllerGoogleMap.complete(controller);
+  _controller = controller;
+  isMapCreated = true;
+  locatePosition();
+  getMapMode();
+  _setMapPins();
+  setState(() {
+
+    _markers.add(
+        Marker(
+          markerId: MarkerId("parking - 1"),
+          position: LatLng(12.9717, 79.1594),
+          icon: mapMarker,
+          infoWindow: InfoWindow(
+            title: "New Parking Slot",
+            snippet: "Rs 150/hr"
+          ),
+        )
+    );
+
+
+  });
+  }
+
+
+
 
 
   Widget _buildLocationInfo() {
@@ -63,18 +131,6 @@ class _UserScreenState extends State<UserScreen> {
   var geoLocator = Geolocator();
 
 
-  // Method to set parking map pin
-  // void setCustomMapPin() async {
-  //   parkingIcon = await BitmapDescriptor.fromAssetImage(
-  //       ImageConfiguration(devicePixelRatio: 2.5),
-  //       'assets/parkingIcon.png');
-  // }
-
-
-  void _setSourceIcon() async {
-    _parkingIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.5), 'assets/parkingIcon.png');
-  }
 
 
   //Method called when map is initialised
@@ -102,39 +158,34 @@ class _UserScreenState extends State<UserScreen> {
 
   bool isMapCreated = false;
 
+
+
+
+
   //default location
-  static final LatLng myLocation = LatLng(12.9717, 79.1594);
-
-  @override
-  void initState() {
-
-    _setSourceIcon();
-    super.initState();
-
-  }
-
+  static final LatLng myLocation = LatLng(13.9717, 79.1594);
   //zoom for the default location
-  final CameraPosition _kGooglePlex = CameraPosition(
+  final CameraPosition parkingLocation = CameraPosition(
     target: myLocation,
     zoom: 16.4746,
   );
 
 
-  Set<Marker> _createMarker() {
-    return <Marker>[
-
-      //Marker for default point in Google Map
-      Marker(
-          markerId: MarkerId("Home"),
-          position: myLocation,
-          icon: _parkingIcon,
-          onTap: (){
-            setState(() {
-              _currentPinData = _sourcePinInfo;
-            });
-          }),
-    ].toSet();
-  }
+  // Set<Marker> _createMarker() {
+  //   return <Marker>[
+  //
+  //     //Marker for default point in Google Map
+  //     Marker(
+  //         markerId: MarkerId("Home"),
+  //         position: myLocation,
+  //         icon: _parkingIcon,
+  //         onTap: (){
+  //           setState(() {
+  //             _currentPinData = _sourcePinInfo;
+  //           });
+  //         }),
+  //   ].toSet();
+  // }
 
   //Setting Map Style
   getMapMode() {
@@ -150,19 +201,21 @@ class _UserScreenState extends State<UserScreen> {
     _controller.setMapStyle(mapStyle);
   }
 
+
+  //Method called when search button is clicked
   searchAndNavigate(){
       print(searchAddress);
-      _controller.animateCamera(CameraUpdate.newCameraPosition(_kGooglePlex));
+      _controller.animateCamera(CameraUpdate.newCameraPosition(parkingLocation));
   }
 
   void _setMapPins() {
     _sourcePinInfo = PinData(
-        pinPath: 'assets/parkingIcon.png',
+        pinPath: 'assets/icon.png',
         locationName: "My Location",
 
 
         location: LatLng(12.9717, 79.1594),
-        avatarPath: "assets/parkingIcon.png",
+        avatarPath: "assets/icon.png",
         labelColor: Colors.blue);
   }
 
@@ -172,7 +225,6 @@ class _UserScreenState extends State<UserScreen> {
     if (isMapCreated) {
       getMapMode();
     }
-
     return Scaffold(
 
       appBar: AppBar(
@@ -212,20 +264,10 @@ class _UserScreenState extends State<UserScreen> {
                               myLocationButtonEnabled: false,
                               myLocationEnabled: true,
                               zoomGesturesEnabled: true,
+                              onMapCreated: _onMapCreated,
                               markers: _markers,
-                              initialCameraPosition: _kGooglePlex,
-                              onMapCreated: (GoogleMapController controller) {
+                              initialCameraPosition: parkingLocation,
 
-                                _controllerGoogleMap.complete(controller);
-                                _controller = controller;
-                                isMapCreated = true;
-                                locatePosition();
-                                getMapMode();
-                                _setMapPins();
-                                setState(() {
-
-                                });
-                              },
 
                             ),
 
