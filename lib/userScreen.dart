@@ -1,20 +1,25 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:parkspace/models/pindata.dart';
 import 'package:geolocator/geolocator.dart';
-
+import 'drawer.dart';
 import 'package:flutter/services.dart';
 
 class UserScreen extends StatefulWidget {
+
   @override
   _UserScreenState createState() => _UserScreenState();
 }
 
+
+
 class _UserScreenState extends State<UserScreen> {
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 
   //initialising the controller for google map
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
@@ -64,6 +69,7 @@ class _UserScreenState extends State<UserScreen> {
 
 
 
+
   PinData _currentPinData = PinData(
       pinPath: '',
       avatarPath: '',
@@ -94,14 +100,8 @@ class _UserScreenState extends State<UserScreen> {
           ),
         )
     );
-
-
   });
   }
-
-
-
-
 
   Widget _buildLocationInfo() {
 
@@ -171,22 +171,6 @@ class _UserScreenState extends State<UserScreen> {
   );
 
 
-  // Set<Marker> _createMarker() {
-  //   return <Marker>[
-  //
-  //     //Marker for default point in Google Map
-  //     Marker(
-  //         markerId: MarkerId("Home"),
-  //         position: myLocation,
-  //         icon: _parkingIcon,
-  //         onTap: (){
-  //           setState(() {
-  //             _currentPinData = _sourcePinInfo;
-  //           });
-  //         }),
-  //   ].toSet();
-  // }
-
   //Setting Map Style
   getMapMode() {
     getJsonFile("assets/map_style.json").then(setMapStyle);
@@ -208,6 +192,7 @@ class _UserScreenState extends State<UserScreen> {
       _controller.animateCamera(CameraUpdate.newCameraPosition(parkingLocation));
   }
 
+
   void _setMapPins() {
     _sourcePinInfo = PinData(
         pinPath: 'assets/icon.png',
@@ -219,6 +204,9 @@ class _UserScreenState extends State<UserScreen> {
         labelColor: Colors.blue);
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -226,6 +214,8 @@ class _UserScreenState extends State<UserScreen> {
       getMapMode();
     }
     return Scaffold(
+
+      key: _scaffoldKey,
 
       appBar: AppBar(
           centerTitle: true,
@@ -235,15 +225,20 @@ class _UserScreenState extends State<UserScreen> {
           backgroundColor: Colors.white,
 
           //Hamburger Menu icon
-          leading: Icon(
-            Icons.menu,
+          leading: IconButton(
+            icon: Icon(Icons.menu),
             color: Colors.deepPurple,
+            onPressed: () => _scaffoldKey.currentState.openDrawer(),
+
           ),
 
           shadowColor: Colors.white,
           elevation: 0,
 
         ),
+
+        drawer: MyDrawer(),
+
         body: SafeArea(
               child: SingleChildScrollView(
                 child: ConstrainedBox(
@@ -255,7 +250,6 @@ class _UserScreenState extends State<UserScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: Stack(
                           children: [
-
                             // Google Map
                             GoogleMap(
                               trafficEnabled: true,
@@ -267,8 +261,6 @@ class _UserScreenState extends State<UserScreen> {
                               onMapCreated: _onMapCreated,
                               markers: _markers,
                               initialCameraPosition: parkingLocation,
-
-
                             ),
 
                             Positioned(
