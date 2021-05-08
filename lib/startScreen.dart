@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class StartScreen extends StatefulWidget {
@@ -8,6 +9,10 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+
+  String _email, _password;
+  final auth = FirebaseAuth.instance;
+
 
 
   TextEditingController emailController = TextEditingController();
@@ -49,11 +54,17 @@ class _StartScreenState extends State<StartScreen> {
 
                 TextFormField(
                   controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                   // ignore: missing_return
                   validator: (String value){
                     if(value.isEmpty){
                       print("Empty value by user");
                     }
+                  },
+                  onChanged: (value){
+                    setState(() {
+                      _email = value.trim();
+                    });
                   },
 
                   decoration: InputDecoration(
@@ -77,12 +88,18 @@ class _StartScreenState extends State<StartScreen> {
 
                 TextFormField(
                   controller: passwordController,
+                  obscureText: true,
                   // ignore: missing_return
                   validator: (String value){
                     if(value.isEmpty){
                       print("Empty value by user");
                     }
                   },
+                  onChanged: (value){
+                    setState(() {
+                      _password = value.trim();
+                    });
+                   },
 
                   decoration: InputDecoration(
                     //   labelText: "First Name",
@@ -104,9 +121,14 @@ class _StartScreenState extends State<StartScreen> {
                 SizedBox(height: 20,),
 
                 GestureDetector(
+
                   onTap: () {
-                    Navigator.pushNamed(context, '/user');
-                  },
+
+                    auth.signInWithEmailAndPassword(email: _email, password: _password).then((_){
+                      Navigator.pushNamed(context, '/user');
+                    });
+
+                    },
                   child: PrimaryButton(
                     btnText: "Login",
                   ),
@@ -143,6 +165,9 @@ class _StartScreenState extends State<StartScreen> {
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       // navigate to desired screen
+                                      auth.createUserWithEmailAndPassword(email: _email, password: _password).then((_){
+                                        Navigator.pushNamed(context, '/user');
+                                      });
                                     }
                               )
                             ]
