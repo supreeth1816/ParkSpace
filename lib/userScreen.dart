@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class UserScreen extends StatefulWidget {
 
@@ -26,6 +27,12 @@ class _UserScreenState extends State<UserScreen> {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController _controller;
 
+
+
+  // List of all markers
+
+  Map<MarkerId, Marker> myMarkers= <MarkerId , Marker>{};
+
   Set<Marker> _markers = {
 
   };
@@ -39,6 +46,8 @@ class _UserScreenState extends State<UserScreen> {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
   }
 
+
+  //mapMarker is custom Marker for parking
   BitmapDescriptor mapMarker;
 
   void setCustomMarker() async {
@@ -47,9 +56,41 @@ class _UserScreenState extends State<UserScreen> {
   }
 
 
+
+  // Getting multiple markers from firebase
+
+
+  void initMarker(specify, specifyId) async {
+    var markerIdVal = specifyId;
+    final MarkerId myMarkerId = MarkerId(markerIdVal);
+    final Marker myMarker = Marker(
+        markerId: myMarkerId,
+        position: LatLng(specify['location'].latitude, specify['location'].longitude),
+        infoWindow: InfoWindow(title: specify['address'], snippet: specify['price']),
+        icon: mapMarker,
+
+    );
+
+    setState(() {
+      myMarkers[myMarkerId] = myMarker;
+    });
+  }
+
+
+  getMarkerData() async {
+    FirebaseFirestore.instance.collection('data').get().then((myMockData) {
+      if(myMockData.docs.isNotEmpty){
+        for(int i=0; i < myMockData.docs.length; i++){
+          initMarker(myMockData.docs[i].data, myMockData.docs[i].id);
+        }
+      }
+    });
+  }
+
+
   @override
   void initState() {
-
+    getMarkerData();
     setCustomMarker();
     super.initState();
 
@@ -57,14 +98,7 @@ class _UserScreenState extends State<UserScreen> {
 
   String searchAddress;
 
-  PinData _currentPinData = PinData(
-      pinPath: '',
-      avatarPath: '',
-      location: LatLng(0, 0),
-      locationName: '',
-      labelColor: Colors.grey);
 
-  PinData _sourcePinInfo;
 
   void _onMapCreated(GoogleMapController controller) {
 
@@ -73,7 +107,9 @@ class _UserScreenState extends State<UserScreen> {
   isMapCreated = true;
   locatePosition();
   getMapMode();
-  _setMapPins();
+
+  // _setMapPins();
+
   setState(() {
 
     _markers.add(
@@ -86,38 +122,13 @@ class _UserScreenState extends State<UserScreen> {
             snippet: "Rs 150/hr"
           ),
         )
+
     );
   });
   }
 
-  Widget _buildLocationInfo() {
-
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.only(left: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              _currentPinData.locationName,
-            ),
-            Text(
-              'Latitude : ${_currentPinData.location.latitude}',
-            ),
-            Text(
-              'Longitude : ${_currentPinData.location.longitude}',
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Position currentPosition;
   var geoLocator = Geolocator();
-
-
 
 
   //Method called when map is initialised
@@ -174,33 +185,15 @@ class _UserScreenState extends State<UserScreen> {
   searchAndNavigate(){
       print(searchAddress);
       _controller.animateCamera(CameraUpdate.newCameraPosition(parkingLocation));
+
+      print(myMarkers);
+      FirebaseFirestore.instance
+          .collection('test')
+          .add({'text': 'data added through app'});
   }
 
 
-  void _setMapPins() {
-    _sourcePinInfo = PinData(
-        pinPath: 'assets/icon.png',
-        locationName: "My Location",
 
-
-        location: LatLng(12.9717, 79.1594),
-        avatarPath: "assets/icon.png",
-        labelColor: Colors.blue);
-  }
-
-  void initMarker(specify, specifyId) async {
-
-  }
-  
-  getMarkerData() async {
-    FirebaseFirestore.instance.collection('data').get().then((myMockData) {
-      if(myMockData.docs.isNotEmpty){
-        for(int i=0; i < myMockData.docs.length; i++){
-
-        }
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -245,6 +238,9 @@ class _UserScreenState extends State<UserScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: Stack(
                           children: [
+
+
+
                             // Google Map
                             GoogleMap(
                               trafficEnabled: true,
@@ -254,6 +250,7 @@ class _UserScreenState extends State<UserScreen> {
                               myLocationEnabled: true,
                               zoomGesturesEnabled: true,
                               onMapCreated: _onMapCreated,
+                            //  markers: Set<Marker>.of(myMarkers.values),
                               markers: _markers,
                               initialCameraPosition: parkingLocation,
                             ),
@@ -351,7 +348,11 @@ class _UserScreenState extends State<UserScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    _buildLocationInfo(),
+
+
+
+
+                                   // _buildLocationInfo(),
                                   ],
                                 ),
                               ),
