@@ -3,12 +3,10 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:parkspace/models/pindata.dart';
 import 'package:geolocator/geolocator.dart';
 import 'drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class UserScreen extends StatefulWidget {
 
@@ -19,7 +17,6 @@ class UserScreen extends StatefulWidget {
 
 
 class _UserScreenState extends State<UserScreen> {
-
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 
@@ -191,8 +188,6 @@ class _UserScreenState extends State<UserScreen> {
           .collection('test')
           .add({'text': 'data added through app'});
   }
-
-
 
 
   @override
