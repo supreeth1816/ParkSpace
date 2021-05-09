@@ -7,6 +7,7 @@ import 'package:parkspace/models/pindata.dart';
 import 'package:geolocator/geolocator.dart';
 import 'drawer.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserScreen extends StatefulWidget {
 
@@ -30,6 +31,7 @@ class _UserScreenState extends State<UserScreen> {
   };
 
 
+  //Getting Bytes to display custom marker
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
@@ -37,22 +39,12 @@ class _UserScreenState extends State<UserScreen> {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
   }
 
-
-
-
   BitmapDescriptor mapMarker;
 
   void setCustomMarker() async {
     final Uint8List markerIcon = await getBytesFromAsset('assets/icon.png', 160);
     mapMarker = await BitmapDescriptor.fromBytes(markerIcon);
   }
-  //
-  // void setCustomMarker() async {
-  //   mapMarker = await BitmapDescriptor.fromAssetImage(
-  //       ImageConfiguration(), 'assets/icon.png');
-  // }
-
-
 
 
   @override
@@ -63,12 +55,7 @@ class _UserScreenState extends State<UserScreen> {
 
   }
 
-
-
   String searchAddress;
-
-
-
 
   PinData _currentPinData = PinData(
       pinPath: '',
@@ -159,9 +146,6 @@ class _UserScreenState extends State<UserScreen> {
   bool isMapCreated = false;
 
 
-
-
-
   //default location
   static final LatLng myLocation = LatLng(13.9717, 79.1594);
   //zoom for the default location
@@ -204,8 +188,19 @@ class _UserScreenState extends State<UserScreen> {
         labelColor: Colors.blue);
   }
 
+  void initMarker(specify, specifyId) async {
 
+  }
+  
+  getMarkerData() async {
+    FirebaseFirestore.instance.collection('data').get().then((myMockData) {
+      if(myMockData.docs.isNotEmpty){
+        for(int i=0; i < myMockData.docs.length; i++){
 
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
