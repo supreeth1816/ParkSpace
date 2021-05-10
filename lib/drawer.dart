@@ -47,32 +47,59 @@ class _MyDrawerState extends State<MyDrawer> {
       );
 
   Widget buildSearchField() {
-    final color = Colors.white;
 
-    return Container(
-      padding: EdgeInsets.only(left: 40,right: 40),
 
-      child: OutlinedButton(
+    return GestureDetector(
+      child: Container(
+        padding: EdgeInsets.only(left: 70,right: 70, top: 15,bottom: 15),
 
-        onPressed: null,
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
+        decoration: BoxDecoration(
+          color: Colors.white12,
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.0),
+          ),
+          border: Border.all(color: Colors.white, width: 1),
+        ),
 
-              ),
+        child: Text(
+          "Find parking slot",
+
+
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0
+
           ),
         ),
-        child: const Text("Find Parking Slot",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
-          fontSize: 18.0,
 
-        ),),
       ),
     );
   }
+
+
+
+  //
+      // OutlinedButton(
+      //
+      //   onPressed: null,
+      //   style: ButtonStyle(
+      //     shape: MaterialStateProperty.all(
+      //         RoundedRectangleBorder(
+      //             borderRadius: BorderRadius.circular(5.0),
+      //
+      //         ),
+      //     ),
+      //   ),
+      //   child: const Text("Find Parking Slot",
+      //   style: TextStyle(
+      //     color: Colors.white,
+      //     fontWeight: FontWeight.w400,
+      //     fontSize: 18.0,
+      //
+      //   ),),
+      // ),
+
+
 
 
 
