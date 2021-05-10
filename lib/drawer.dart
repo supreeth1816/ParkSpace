@@ -50,6 +50,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
 
     return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, '/user'),
       child: Container(
         padding: EdgeInsets.only(left: 70,right: 70, top: 15,bottom: 15),
 
