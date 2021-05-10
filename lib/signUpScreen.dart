@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
+class VendorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

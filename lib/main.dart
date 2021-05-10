@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'signUpScreen.dart';
 import 'userScreen.dart';
 import 'startScreen.dart';
+import 'statusScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -21,8 +22,9 @@ class ParkspaceApp extends StatelessWidget {
 
         routes: {
 
-          '/vendor': (context) => SignUpScreen(),
+          '/vendor': (context) => VendorScreen(),
           '/user': (context) => UserScreen(),
+          '/status': (context) => StatusScreen(),
 
         },
       );

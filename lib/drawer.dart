@@ -94,12 +94,18 @@ class _MyDrawerState extends State<MyDrawer> {
     Navigator.of(context).pop();
 
     switch (index) {
+
+      //post parking
       case 0:
-        Navigator.pushNamed(context, '/user');
+        Navigator.pushNamed(context, '/vendor');
         break;
+
+       //parking status
       case 1:
-        Navigator.pushNamed(context, '/user');
+        Navigator.pushNamed(context, '/status');
         break;
+
+
     }
   }
 

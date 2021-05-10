@@ -27,7 +27,6 @@ class _UserScreenState extends State<UserScreen> {
 
 
   // List of all markers
-
   Map<MarkerId, Marker> myMarkers= <MarkerId , Marker>{};
 
   Set<Marker> _markers = {
