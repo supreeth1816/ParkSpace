@@ -50,29 +50,54 @@ class _MyDrawerState extends State<MyDrawer> {
     final color = Colors.white;
 
     return Container(
-      padding: EdgeInsets.only(left: 10,right: 10),
-      child: TextField(
+      padding: EdgeInsets.only(left: 40,right: 40),
 
-        style: TextStyle(color: color),
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          hintText: 'Search',
-          hintStyle: TextStyle(color: color),
-          prefixIcon: Icon(Icons.search, color: color),
-          filled: true,
-          fillColor: Colors.white12,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(color: color.withOpacity(0.7)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(color: color.withOpacity(0.7)),
+      child: OutlinedButton(
+
+        onPressed: null,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+
+              ),
           ),
         ),
+        child: const Text("Find Parking Slot",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
+          fontSize: 18.0,
+
+        ),),
       ),
     );
   }
+
+
+
+      // child: TextField(
+      //
+      //   style: TextStyle(color: color),
+      //   decoration: InputDecoration(
+      //     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      //     hintText: 'Search',
+      //     hintStyle: TextStyle(color: color),
+      //     prefixIcon: Icon(Icons.search, color: color),
+      //     filled: true,
+      //     fillColor: Colors.white12,
+      //     enabledBorder: OutlineInputBorder(
+      //       borderRadius: BorderRadius.circular(5),
+      //       borderSide: BorderSide(color: color.withOpacity(0.7)),
+      //     ),
+      //     focusedBorder: OutlineInputBorder(
+      //       borderRadius: BorderRadius.circular(5),
+      //       borderSide: BorderSide(color: color.withOpacity(0.7)),
+      //     ),
+      //   ),
+      // ),
+   // );
+
 
   Widget buildMenuItem({
     @required String text,
