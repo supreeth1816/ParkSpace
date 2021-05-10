@@ -34,6 +34,8 @@ class _StatusScreenState extends State<StatusScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      key: _scaffoldKey,
       drawer: MyDrawer(),
 
       appBar: AppBar(
@@ -64,7 +66,7 @@ class _StatusScreenState extends State<StatusScreen> {
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text(
-              "My Parking Slots",
+              "Find Parking Status",
               style: TextStyle(
                 fontSize: 24.0,
                 color: Colors.black87,
