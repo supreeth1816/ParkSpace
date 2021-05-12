@@ -179,6 +179,151 @@ class _UserScreenState extends State<UserScreen> {
 
       key: _scaffoldKey,
 
+      body: SafeArea(
+        child: SingleChildScrollView(
+          //padding: EdgeInsets.only(top: 0),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height - 102,
+                  width: MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: [
+
+                      // Google Map
+                      GoogleMap(
+                        trafficEnabled: true,
+                        mapType: MapType.normal,
+                        zoomControlsEnabled: true,
+                        myLocationButtonEnabled: false,
+                        myLocationEnabled: true,
+                        zoomGesturesEnabled: true,
+                        onMapCreated: _onMapCreated,
+                        //  markers: Set<Marker>.of(myMarkers.values),
+                        markers: _markers,
+                        initialCameraPosition: parkingLocation,
+                      ),
+
+                      Stack(
+                        children: [
+                          Positioned(
+                            left: 15,
+                            right: 15.0,
+                            top: 30.0,
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                              height: 54.0,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(14.0),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 40.0,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.search, color: Colors.blueAccent,),
+                                  SizedBox(width: 10),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          Positioned(
+                            left: 62.0 + 5,
+                            right: 30.0 + 5,
+                            top: 33.0,
+                            child: Container(
+                              width: 250,
+                              child: TextField(
+
+                                onTap: (){
+                                  print("Text field is tapped");
+                                },
+
+                                onChanged: (val){
+
+                                  // print("Value changed : ");
+                                  // print(searchAddress);
+                                  setState(() {
+                                    searchAddress = val;
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "Where do you go?",
+                                  border: InputBorder.none,
+
+                                  suffix: GestureDetector(
+                                    child: Text("Search",
+                                      style: TextStyle(
+                                          color: Colors.blueAccent,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.bold
+                                      ),),
+                                    onTap: searchAndNavigate,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                          ),
+                        ],
+                      ),
+
+
+
+                      //Bottom Tabs
+
+                      Positioned(
+                        left: 10.0,
+                        right: 10.0,
+                        bottom: 5.0,
+                        child: Container(
+
+                          padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                          height: 90.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 40.0,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+
+                              // _buildLocationInfo(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+
+              ],
+            ),
+          ),
+        ),
+      ),
+
       appBar: AppBar(
             centerTitle: true,
 
@@ -201,146 +346,7 @@ class _UserScreenState extends State<UserScreen> {
 
         drawer: MyDrawer(),
 
-        body: SafeArea(
-              child: SingleChildScrollView(
-                //padding: EdgeInsets.only(top: 0),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: MediaQuery.of(context).size.height - 92,
-                        width: MediaQuery.of(context).size.width,
-                        child: Stack(
-                          children: [
 
-
-
-                            // Google Map
-                            GoogleMap(
-                              trafficEnabled: true,
-                              mapType: MapType.normal,
-                              zoomControlsEnabled: true,
-                              myLocationButtonEnabled: false,
-                              myLocationEnabled: true,
-                              zoomGesturesEnabled: true,
-                              onMapCreated: _onMapCreated,
-                            //  markers: Set<Marker>.of(myMarkers.values),
-                              markers: _markers,
-                              initialCameraPosition: parkingLocation,
-                            ),
-
-                            Positioned(
-                              left: 10.0,
-                              right: 10.0,
-                              top: 14.0,
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                                height: 54.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15.0),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: 40.0,
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.search, color: Colors.blueAccent,),
-                                        SizedBox(width: 10),
-                                      ],
-                                        ),
-                              ),
-                            ),
-
-                            Positioned(
-                              left: 62.0,
-                              right: 30.0,
-                              top: 17.0,
-                              child: Container(
-                                      width: 250,
-                                      child: TextField(
-
-                                        onTap: (){
-                                          print("Text field is tapped");
-                                        },
-
-                                        onChanged: (val){
-
-                                          // print("Value changed : ");
-                                          // print(searchAddress);
-                                          setState(() {
-                                            searchAddress = val;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Where do you go?",
-                                          border: InputBorder.none,
-
-                                          suffix: GestureDetector(
-                                              child: Text("Search",
-                                              style: TextStyle(
-                                                color: Colors.blueAccent,
-                                                fontSize: 14.0,
-                                                fontWeight: FontWeight.bold
-                                              ),),
-                                            onTap: searchAndNavigate,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                ),
-
-                          //Bottom Tabs
-
-                            Positioned(
-                                left: 10.0,
-                                right: 10.0,
-                                bottom: 5.0,
-                              child: Container(
-
-                                padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                                height: 90.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15.0),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: 40.0,
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-
-                                    // _buildLocationInfo(),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-            ),
     );
   }
 }
