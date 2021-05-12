@@ -23,6 +23,8 @@ class _UserScreenState extends State<UserScreen> {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController _controller;
 
+ // var containerHeight = 220.0;
+
 
   // List of all markers
   Map<MarkerId, Marker> myMarkers= <MarkerId , Marker>{};
@@ -165,6 +167,11 @@ class _UserScreenState extends State<UserScreen> {
           .add({'text': 'data added through app'});
   }
 
+  verticalDrag(){
+    print("Vertically trying to drag");
+  //  containerHeight = 200.0;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -193,17 +200,22 @@ class _UserScreenState extends State<UserScreen> {
                     children: [
 
                       // Google Map
-                      GoogleMap(
-                        trafficEnabled: true,
-                        mapType: MapType.normal,
-                        zoomControlsEnabled: true,
-                        myLocationButtonEnabled: false,
-                        myLocationEnabled: true,
-                        zoomGesturesEnabled: true,
-                        onMapCreated: _onMapCreated,
-                        //  markers: Set<Marker>.of(myMarkers.values),
-                        markers: _markers,
-                        initialCameraPosition: parkingLocation,
+                      Container(
+                        height: MediaQuery.of(context).size.height - 202,
+
+
+                        child: GoogleMap(
+                          trafficEnabled: true,
+                          mapType: MapType.normal,
+                          zoomControlsEnabled: true,
+                          myLocationButtonEnabled: false,
+                          myLocationEnabled: true,
+                          zoomGesturesEnabled: true,
+                          onMapCreated: _onMapCreated,
+                          //  markers: Set<Marker>.of(myMarkers.values),
+                          markers: _markers,
+                          initialCameraPosition: parkingLocation,
+                        ),
                       ),
 
                       Stack(
@@ -282,35 +294,58 @@ class _UserScreenState extends State<UserScreen> {
 
                       //Bottom Tabs
 
+
                       Positioned(
-                        left: 10.0,
-                        right: 10.0,
-                        bottom: 5.0,
+                        left: 0.0,
+                        right: 0.0,
+                        bottom: 0.0,
                         child: Container(
 
-                          padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                          height: 90.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15.0),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 40.0,
+                            padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                            //height: containerHeight,
+                          height: 220.0,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30.0),
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 20.0,
+                                  offset: Offset(
+                                    0,-20
+                                  ),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
 
-                              // _buildLocationInfo(),
-                            ],
+                                GestureDetector(
+
+                                 // onTap: verticalDrag,
+                                  child: Container(
+                                    width: 44.0,
+                                    height: 8.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black12,
+                                      borderRadius: BorderRadius.all(
+                                       Radius.circular(10.0),
+                                      ),
+                                    ),
+
+
+                                  ),
+                                ),
+
+                                // _buildLocationInfo(),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+
                     ],
                   ),
                 ),
