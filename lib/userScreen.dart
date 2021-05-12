@@ -320,10 +320,7 @@ class _UserScreenState extends State<UserScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
 
-
-
-
-                                   // _buildLocationInfo(),
+                                    // _buildLocationInfo(),
                                   ],
                                 ),
                               ),
