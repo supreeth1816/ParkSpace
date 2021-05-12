@@ -221,8 +221,8 @@ class _UserScreenState extends State<UserScreen> {
                       Stack(
                         children: [
                           Positioned(
-                            left: 15,
-                            right: 15.0,
+                            left: 20.0,
+                            right: 20.0,
                             top: 25.0,
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -234,8 +234,10 @@ class _UserScreenState extends State<UserScreen> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 40.0,
+                                    color: Colors.black12.withOpacity(0.1),
+
+                                    blurRadius: 30.0,
+                                    offset: Offset(0,10),
                                   ),
                                 ],
                               ),
@@ -250,8 +252,8 @@ class _UserScreenState extends State<UserScreen> {
                           ),
 
                           Positioned(
-                            left: 62.0 + 5,
-                            right: 30.0 + 5,
+                            left: 62.0 + 10,
+                            right: 30.0 + 10,
                             top: 25.0 + 3,
                             child: Container(
                               width: 250,
@@ -306,13 +308,14 @@ class _UserScreenState extends State<UserScreen> {
                           height: 220.0,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(30.0),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(40.0),
+                                topRight: Radius.circular(40.0)
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 20.0,
+                                  color: Colors.black12.withOpacity(0.1),
+                                  blurRadius: 30.0,
                                   offset: Offset(
                                     0,-20
                                   ),
@@ -328,7 +331,7 @@ class _UserScreenState extends State<UserScreen> {
                                  // onTap: verticalDrag,
                                   child: Container(
                                     width: 44.0,
-                                    height: 8.0,
+                                    height: 7.0,
                                     decoration: BoxDecoration(
                                       color: Colors.black12,
                                       borderRadius: BorderRadius.all(
