@@ -173,33 +173,37 @@ class _UserScreenState extends State<UserScreen> {
       getMapMode();
     }
     return Scaffold(
+      extendBodyBehindAppBar: true,
+
+
 
       key: _scaffoldKey,
 
       appBar: AppBar(
-          centerTitle: true,
+            centerTitle: true,
 
-          //AppBar Title
-          title: Text("ParkSpace", style: TextStyle(color: Colors.deepPurple),),
-          backgroundColor: Colors.white,
+            //AppBar Title
+            title: Text("ParkSpace", style: TextStyle(color: Colors.deepPurple),),
+            backgroundColor: Colors.transparent,
 
-          //Hamburger Menu icon
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            color: Colors.deepPurple,
-            onPressed: () => _scaffoldKey.currentState.openDrawer(),
+            //Hamburger Menu icon
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              color: Colors.deepPurple,
+              onPressed: () => _scaffoldKey.currentState.openDrawer(),
+
+            ),
+
+           // shadowColor: Colors.white,
+            elevation: 0,
 
           ),
-
-          shadowColor: Colors.white,
-          elevation: 0,
-
-        ),
 
         drawer: MyDrawer(),
 
         body: SafeArea(
               child: SingleChildScrollView(
+                //padding: EdgeInsets.only(top: 0),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(),
                   child: Column(
