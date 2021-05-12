@@ -211,7 +211,7 @@ class _UserScreenState extends State<UserScreen> {
                           Positioned(
                             left: 15,
                             right: 15.0,
-                            top: 30.0,
+                            top: 25.0,
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
                               height: 54.0,
@@ -240,7 +240,7 @@ class _UserScreenState extends State<UserScreen> {
                           Positioned(
                             left: 62.0 + 5,
                             right: 30.0 + 5,
-                            top: 33.0,
+                            top: 25.0 + 3,
                             child: Container(
                               width: 250,
                               child: TextField(
