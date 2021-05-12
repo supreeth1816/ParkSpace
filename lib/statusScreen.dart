@@ -66,7 +66,7 @@ class _StatusScreenState extends State<StatusScreen> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                "Find Parking Status",
+                "My Parking Status",
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.black87,

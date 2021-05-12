@@ -222,16 +222,16 @@ class _UserScreenState extends State<UserScreen> {
                       Stack(
                         children: [
                           Positioned(
-                            left: 23.0,
-                            right: 23.0,
-                            top: 25.0,
+                            left: 22.0,
+                            right: 22.0,
+                            top: 23.0,
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
                               height: 54.0,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(14.0),
+                                  Radius.circular(10.0),
                                 ),
                                 boxShadow: [
                                   BoxShadow(
@@ -253,9 +253,9 @@ class _UserScreenState extends State<UserScreen> {
                           ),
 
                           Positioned(
-                            left: 62.0 + 13,
-                            right: 30.0 + 13,
-                            top: 25.0 + 3,
+                            left: 62.0 + 12,
+                            right: 30.0 + 12,
+                            top: 25.0 + 1,
                             child: Container(
                               width: 250,
                               child: TextField(
