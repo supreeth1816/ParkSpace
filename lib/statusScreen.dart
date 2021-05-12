@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'drawer.dart';
-import 'drawer.dart';
+
 
 class StatusScreen extends StatefulWidget {
   @override
@@ -8,8 +8,6 @@ class StatusScreen extends StatefulWidget {
 }
 
 class _StatusScreenState extends State<StatusScreen> {
-
-
 
   final TextStyle whiteNameTextStyle = TextStyle(
     fontSize: 24.0,

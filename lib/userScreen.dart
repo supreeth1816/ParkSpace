@@ -7,6 +7,7 @@ import 'drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class UserScreen extends StatefulWidget {
 
   @override
@@ -221,8 +222,8 @@ class _UserScreenState extends State<UserScreen> {
                       Stack(
                         children: [
                           Positioned(
-                            left: 20.0,
-                            right: 20.0,
+                            left: 23.0,
+                            right: 23.0,
                             top: 25.0,
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -252,8 +253,8 @@ class _UserScreenState extends State<UserScreen> {
                           ),
 
                           Positioned(
-                            left: 62.0 + 10,
-                            right: 30.0 + 10,
+                            left: 62.0 + 13,
+                            right: 30.0 + 13,
                             top: 25.0 + 3,
                             child: Container(
                               width: 250,
@@ -309,12 +310,12 @@ class _UserScreenState extends State<UserScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(40.0),
-                                topRight: Radius.circular(40.0)
+                                topLeft: Radius.circular(32.0),
+                                topRight: Radius.circular(32.0)
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black12.withOpacity(0.1),
+                                  color: Colors.black12.withOpacity(0.07),
                                   blurRadius: 30.0,
                                   offset: Offset(
                                     0,-20
