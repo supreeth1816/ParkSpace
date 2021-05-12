@@ -6,7 +6,10 @@ import 'package:geolocator/geolocator.dart';
 import 'drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:line_icons/line_icon.dart';
 
 class UserScreen extends StatefulWidget {
 
@@ -182,9 +185,6 @@ class _UserScreenState extends State<UserScreen> {
     }
     return Scaffold(
       extendBodyBehindAppBar: true,
-
-
-
       key: _scaffoldKey,
 
       body: SafeArea(
@@ -224,7 +224,7 @@ class _UserScreenState extends State<UserScreen> {
                           Positioned(
                             left: 22.0,
                             right: 22.0,
-                            top: 23.0,
+                            top: 20.0,
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
                               height: 54.0,
@@ -255,7 +255,7 @@ class _UserScreenState extends State<UserScreen> {
                           Positioned(
                             left: 62.0 + 12,
                             right: 30.0 + 12,
-                            top: 25.0 + 1,
+                            top: 23.0,
                             child: Container(
                               width: 250,
                               child: TextField(
@@ -367,12 +367,18 @@ class _UserScreenState extends State<UserScreen> {
             centerTitle: true,
 
             //AppBar Title
-            title: Text("ParkSpace", style: TextStyle(color: Colors.deepPurple),),
+            title: Text("ParkSpace", style: GoogleFonts.quicksand(
+              fontWeight: FontWeight.bold,
+
+              textStyle: TextStyle(
+                color: Colors.deepPurple,
+              ),
+            )),
             backgroundColor: Colors.transparent,
 
             //Hamburger Menu icon
             leading: IconButton(
-              icon: Icon(Icons.menu),
+              icon: Icon(LineIcons.line),
               color: Colors.deepPurple,
               onPressed: () => _scaffoldKey.currentState.openDrawer(),
 
