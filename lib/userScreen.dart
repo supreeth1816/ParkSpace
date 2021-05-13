@@ -33,8 +33,8 @@ class _UserScreenState extends State<UserScreen> {
  // var containerHeight = 220.0;
 
 
-  // List of all markers
-  Map<MarkerId, Marker> myMarkers= <MarkerId , Marker>{};
+  // // List of all markers
+  // Map<MarkerId, Marker> myMarkers= <MarkerId , Marker>{};
 
 
 // Using set becuase all points are unique
@@ -43,38 +43,38 @@ class _UserScreenState extends State<UserScreen> {
   };
 
 
-  // Getting multiple markers from firebase
-  void initMarker(specify, specifyId) async {
-    var markerIdVal = specifyId;
-    final MarkerId myMarkerId = MarkerId(markerIdVal);
-    final Marker myMarker = Marker(
-        markerId: myMarkerId,
-        position: LatLng(specify['location'].latitude, specify['location'].longitude),
-        infoWindow: InfoWindow(title: specify['address'], snippet: specify['price']),
-        icon: mapMarker,
+  // // Getting multiple markers from firebase
+  // void initMarker(specify, specifyId) async {
+  //   var markerIdVal = specifyId;
+  //   final MarkerId myMarkerId = MarkerId(markerIdVal);
+  //   final Marker myMarker = Marker(
+  //       markerId: myMarkerId,
+  //       position: LatLng(specify['location'].latitude, specify['location'].longitude),
+  //       infoWindow: InfoWindow(title: specify['address'], snippet: specify['price']),
+  //       icon: mapMarker,
+  //
+  //   );
+  //
+  //   setState(() {
+  //     myMarkers[myMarkerId] = myMarker;
+  //   });
+  // }
 
-    );
-
-    setState(() {
-      myMarkers[myMarkerId] = myMarker;
-    });
-  }
-
-
-  getMarkerData() async {
-    FirebaseFirestore.instance.collection('data').get().then((myMockData) {
-      if(myMockData.docs.isNotEmpty){
-        for(int i=0; i < myMockData.docs.length; i++){
-          initMarker(myMockData.docs[i].data, myMockData.docs[i].id);
-        }
-      }
-    });
-  }
+  //
+  // getMarkerData() async {
+  //   FirebaseFirestore.instance.collection('data').get().then((myMockData) {
+  //     if(myMockData.docs.isNotEmpty){
+  //       for(int i=0; i < myMockData.docs.length; i++){
+  //         initMarker(myMockData.docs[i].data, myMockData.docs[i].id);
+  //       }
+  //     }
+  //   });
+  // }
 
 
   @override
   void initState() {
-    getMarkerData();
+  //  getMarkerData();
     setCustomMarker();
     super.initState();
 
@@ -171,7 +171,7 @@ class _UserScreenState extends State<UserScreen> {
       print(searchAddress);
       _controller.animateCamera(CameraUpdate.newCameraPosition(parkingLocation));
 
-      print(myMarkers);
+      //print(myMarkers);
       FirebaseFirestore.instance
           .collection('test')
           .add({'text': 'data added through app'});
@@ -408,9 +408,11 @@ class _UserScreenState extends State<UserScreen> {
               Container(
                 padding: EdgeInsets.only(bottom: 0),
                 child: IconButton(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                   icon: Icon(
                       FontAwesomeIcons.carAlt,
-                    size: 19,
+                    size: 20,
 
                   ),
                   color: _isCar ? Colors.deepPurple : Colors.grey,
@@ -431,7 +433,7 @@ class _UserScreenState extends State<UserScreen> {
               Container(
                 padding: EdgeInsets.only(top: 0),
                 height: 3.0,
-                width: 10.0,
+                width: 12.0,
 
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
@@ -448,9 +450,11 @@ class _UserScreenState extends State<UserScreen> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.only(right: 3),
+                      padding: EdgeInsets.only(right: 3, top: 2),
 
                       child: IconButton(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         icon: Icon(
                           FontAwesomeIcons.biking,
                           size: 17,
@@ -482,12 +486,7 @@ class _UserScreenState extends State<UserScreen> {
                   ],
                 ),
               ),
-
-
-
-
-
-            ],
+             ],
 
         elevation: 0,
           ),
