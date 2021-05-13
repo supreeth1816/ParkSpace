@@ -26,7 +26,10 @@ class _UserScreenState extends State<UserScreen> {
   //initialising the controller for google map
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController _controller;
-
+  var _isBike = false;
+  var _isCar = true;
+  var color1 = Colors.deepPurple;
+  var color2 = Colors.grey;
  // var containerHeight = 220.0;
 
 
@@ -399,24 +402,106 @@ class _UserScreenState extends State<UserScreen> {
             ),
 
         actions: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.add),
-            tooltip: 'Action Tool Tip',
-            onPressed: () {
-              print("onPressed");
-            },
+          Column(
+            children: [
+              SizedBox(height: 4,),
+              Container(
+                padding: EdgeInsets.only(bottom: 0),
+                child: IconButton(
+                  icon: Icon(
+                      FontAwesomeIcons.carAlt,
+                    size: 19,
+
+                  ),
+                  color: _isCar ? Colors.deepPurple : Colors.grey,
+
+                  onPressed: () {
+                    setState(() {
+                      _isCar = true;
+                      _isBike = false;
+
+                    });
+                    print("Selected Car");
+                  },
+                ),
+              ),
+
+
+
+              Container(
+                padding: EdgeInsets.only(top: 0),
+                height: 3.0,
+                width: 10.0,
+
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: _isCar ? Colors.deepPurple : Colors.transparent,
+                ),
+              ),
+
+
+            ],
           ),
-        ],
 
-           // shadowColor: Colors.white,
-            elevation: 0,
+              Container(
+                padding: EdgeInsets.only(right: 8),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(right: 3),
 
+                      child: IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.biking,
+                          size: 17,
+
+                        ),
+                        color: _isBike ? Colors.deepPurple : Colors.grey,
+
+                        onPressed: () {
+                          setState(() {
+                            _isBike = true;
+                            _isCar = false;
+
+                          });
+                          print("Selected Bike");
+                        },
+                      ),
+                    ),
+
+                    Container(
+                      padding: EdgeInsets.only(top: 0, left: 0),
+                      height: 3.0,
+                      width: 12.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: _isBike ? Colors.deepPurple : Colors.transparent,
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+
+
+
+
+
+            ],
+
+        elevation: 0,
           ),
 
-        drawer: MyDrawer(),
+      // shadowColor: Colors.white,
+      drawer: MyDrawer(),
 
 
     );
+
+
+
+
+
   }
 }
 
