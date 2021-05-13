@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'navTitle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
@@ -378,15 +379,8 @@ class _UserScreenState extends State<UserScreen> {
 
             centerTitle: true,
 
-
-            //AppBar Title
-            title: Text("ParkSpace", style: GoogleFonts.quicksand(
-              fontWeight: FontWeight.bold,
-
-              textStyle: TextStyle(
-                color: Colors.deepPurple,
-              ),
-            )),
+        //AppBar Title
+            title: NavTitle(),
             backgroundColor: Colors.transparent,
 
 
