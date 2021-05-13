@@ -32,6 +32,9 @@ class _UserScreenState extends State<UserScreen> {
 
   // List of all markers
   Map<MarkerId, Marker> myMarkers= <MarkerId , Marker>{};
+
+
+// Using set becuase all points are unique
   Set<Marker> _markers = {
 
   };
@@ -171,8 +174,9 @@ class _UserScreenState extends State<UserScreen> {
           .add({'text': 'data added through app'});
   }
 
-  verticalDrag(){
-    print("Vertically trying to drag");
+  getAllMarkers(){
+    print("markers: ");
+    print(_markers);
   //  containerHeight = 200.0;
   }
 
@@ -274,6 +278,10 @@ class _UserScreenState extends State<UserScreen> {
                                 },
                                 decoration: InputDecoration(
                                   hintText: "Where do you go?",
+                                  hintStyle: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black38
+                                  ),
                                   border: InputBorder.none,
 
                                   suffix: GestureDetector(
@@ -310,8 +318,8 @@ class _UserScreenState extends State<UserScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(32.0),
-                                topRight: Radius.circular(32.0)
+                                topLeft: Radius.circular(30.0),
+                                topRight: Radius.circular(30.0)
                               ),
                               boxShadow: [
                                 BoxShadow(
@@ -329,7 +337,7 @@ class _UserScreenState extends State<UserScreen> {
 
                                 GestureDetector(
 
-                                 // onTap: verticalDrag,
+                                  onTap: getAllMarkers,
                                   child: Container(
                                     width: 44.0,
                                     height: 7.0,
@@ -366,6 +374,12 @@ class _UserScreenState extends State<UserScreen> {
       appBar: AppBar(
             centerTitle: true,
 
+        // actions: <Widget>[
+        //   Container(
+        //     child: Text("Hello"),
+        //   ),
+        // ],
+
             //AppBar Title
             title: Text("ParkSpace", style: GoogleFonts.quicksand(
               fontWeight: FontWeight.bold,
@@ -376,9 +390,13 @@ class _UserScreenState extends State<UserScreen> {
             )),
             backgroundColor: Colors.transparent,
 
+
             //Hamburger Menu icon
             leading: IconButton(
-              icon: Icon(LineIcons.line),
+              icon: Icon(
+                  FontAwesomeIcons.bars,
+                size: 19,
+              ),
               color: Colors.deepPurple,
               onPressed: () => _scaffoldKey.currentState.openDrawer(),
 
