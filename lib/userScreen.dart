@@ -357,7 +357,6 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ),
                         ),
-
                     ],
                   ),
                 ),
@@ -372,13 +371,10 @@ class _UserScreenState extends State<UserScreen> {
       ),
 
       appBar: AppBar(
+
+
             centerTitle: true,
 
-        // actions: <Widget>[
-        //   Container(
-        //     child: Text("Hello"),
-        //   ),
-        // ],
 
             //AppBar Title
             title: Text("ParkSpace", style: GoogleFonts.quicksand(
@@ -401,6 +397,16 @@ class _UserScreenState extends State<UserScreen> {
               onPressed: () => _scaffoldKey.currentState.openDrawer(),
 
             ),
+
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.add),
+            tooltip: 'Action Tool Tip',
+            onPressed: () {
+              print("onPressed");
+            },
+          ),
+        ],
 
            // shadowColor: Colors.white,
             elevation: 0,
