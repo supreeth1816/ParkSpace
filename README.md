@@ -7,5 +7,5 @@ ParkSpace - Smart parking monitoring and management app
 - Dynamic Pricing
 
 
-For Design file:
+Design file:
 https://www.figma.com/file/WfSvZTCcX0O0mLeOX1SIuf/ParkSpace?node-id=0%3A1
