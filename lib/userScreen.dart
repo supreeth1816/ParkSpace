@@ -381,13 +381,13 @@ class _UserScreenState extends State<UserScreen> {
 
         //AppBar Title
             title: NavTitle(),
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
 
 
             //Hamburger Menu icon
             leading: IconButton(
               icon: Icon(
-                  FontAwesomeIcons.bars,
+                FontAwesomeIcons.bars,
                 size: 19,
               ),
               color: Colors.deepPurple,
