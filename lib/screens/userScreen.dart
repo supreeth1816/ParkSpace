@@ -40,6 +40,111 @@ class _UserScreenState extends State<UserScreen> {
       extendBodyBehindAppBar: true,
       key: _scaffoldKey,
 
+
+      appBar: AppBar(
+
+        centerTitle: true,
+
+        //AppBar Title
+        title: NavTitle(),
+        backgroundColor: Colors.white,
+
+        //Hamburger Menu icon
+        leading: IconButton(
+          icon: Icon(
+            FontAwesomeIcons.bars,
+            size: 19,
+          ),
+          color: Colors.deepPurple,
+          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+
+        ),
+
+        actions: <Widget>[
+
+          Column(
+            children: [
+              SizedBox(height: 4,),
+              Container(
+                padding: EdgeInsets.only(bottom: 0),
+                child: IconButton(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  icon: Icon(
+                    FontAwesomeIcons.carAlt,
+                    size: 20,
+
+                  ),
+                  color: _isCar ? Colors.deepPurple : Colors.grey,
+
+                  onPressed: () {
+                    setState(() {
+                      _isCar = true;
+                      _isBike = false;
+                    });
+                    print("Selected Car");
+                  },
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.only(top: 0),
+                height: 3.0,
+                width: 12.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: _isCar ? Colors.deepPurple : Colors.transparent,
+                ),
+              ),
+            ],
+          ),
+
+          Container(
+            padding: EdgeInsets.only(right: 8),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(right: 3, top: 2),
+
+                  child: IconButton(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    icon: Icon(
+                      FontAwesomeIcons.biking,
+                      size: 17,
+                    ),
+                    color: _isBike ? Colors.deepPurple : Colors.grey,
+
+                    onPressed: () {
+                      setState(() {
+                        _isBike = true;
+                        _isCar = false;
+                      });
+                      print("Selected Bike");
+                    },
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.only(top: 0, left: 0),
+                  height: 3.0,
+                  width: 12.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: _isBike ? Colors.deepPurple : Colors.transparent,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+
+        elevation: 0,
+      ),
+
+      // shadowColor: Colors.white,
+      drawer: MyDrawer(),
+
       body: SafeArea(
         child: SingleChildScrollView(
           //padding: EdgeInsets.only(top: 0),
@@ -76,7 +181,6 @@ class _UserScreenState extends State<UserScreen> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black12.withOpacity(0.1),
-
                                     blurRadius: 30.0,
                                     offset: Offset(0,10),
                                   ),
@@ -134,7 +238,7 @@ class _UserScreenState extends State<UserScreen> {
                         right: 0.0,
                         bottom: 0.0,
                         child: Container(
-                          padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                          padding: EdgeInsets.fromLTRB(18, 10, 16, 10),
                             //height: containerHeight,
                           height: 270.0,
                             decoration: BoxDecoration(
@@ -288,9 +392,57 @@ class _UserScreenState extends State<UserScreen> {
                                 ),
 
                                 Container(
-                                  width: ,
-
+                                  height: 1,
+                                  margin: EdgeInsets.only(left: 10, right: 12),
+                                  color: Color(0xffe4e4e4),
                                 ),
+
+
+                                Container(
+                                  padding: EdgeInsets.only(top: 16),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                                    children: [
+                                      Container(
+
+                                        width: 120,
+                                        margin: EdgeInsets.only(left: 30,right: 10),
+                                        child:
+                                        Text("More Details",
+                                        style: GoogleFonts.quicksand(
+                                          fontSize: 18,
+                                          color: Color(0xffaf76ea),
+                                          fontWeight: FontWeight.w800
+
+
+                                        ),
+                                        ),
+                                      ),
+
+
+                                      Container(
+                                      //  width: 150,
+                                        padding: EdgeInsets.only(top: 15, bottom: 15, left: 56, right: 56),
+                                        margin: EdgeInsets.only(left: 10),
+
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffaf76ea),
+                                          borderRadius: BorderRadius.circular(15),
+
+                                        ),
+                                        child:
+                                        Text("Book Slot",
+                                        style: GoogleFonts.quicksand(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                            fontWeight: FontWeight.w800,
+                                        ),),
+                                      ),
+                                    ],
+                                  ),
+                                )
                                 // _buildLocationInfo(),
                               ],
                             ),
@@ -307,114 +459,7 @@ class _UserScreenState extends State<UserScreen> {
           ),
         ),
       ),
-
-      appBar: AppBar(
-
-        centerTitle: true,
-
-        //AppBar Title
-            title: NavTitle(),
-            backgroundColor: Colors.white,
-
-        //Hamburger Menu icon
-            leading: IconButton(
-              icon: Icon(
-                FontAwesomeIcons.bars,
-                size: 19,
-              ),
-              color: Colors.deepPurple,
-              onPressed: () => _scaffoldKey.currentState.openDrawer(),
-
-            ),
-
-        actions: <Widget>[
-
-          Column(
-            children: [
-              SizedBox(height: 4,),
-              Container(
-                padding: EdgeInsets.only(bottom: 0),
-                child: IconButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  icon: Icon(
-                      FontAwesomeIcons.carAlt,
-                    size: 20,
-
-                  ),
-                  color: _isCar ? Colors.deepPurple : Colors.grey,
-
-                  onPressed: () {
-                    setState(() {
-                      _isCar = true;
-                      _isBike = false;
-                    });
-                    print("Selected Car");
-                  },
-                ),
-              ),
-
-              Container(
-                padding: EdgeInsets.only(top: 0),
-                height: 3.0,
-                width: 12.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: _isCar ? Colors.deepPurple : Colors.transparent,
-                ),
-              ),
-            ],
-          ),
-
-              Container(
-                padding: EdgeInsets.only(right: 8),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(right: 3, top: 2),
-
-                      child: IconButton(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        icon: Icon(
-                          FontAwesomeIcons.biking,
-                          size: 17,
-                        ),
-                        color: _isBike ? Colors.deepPurple : Colors.grey,
-
-                        onPressed: () {
-                          setState(() {
-                            _isBike = true;
-                            _isCar = false;
-                          });
-                          print("Selected Bike");
-                        },
-                      ),
-                    ),
-
-                    Container(
-                      padding: EdgeInsets.only(top: 0, left: 0),
-                      height: 3.0,
-                      width: 12.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: _isBike ? Colors.deepPurple : Colors.transparent,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-             ],
-
-        elevation: 0,
-          ),
-
-      // shadowColor: Colors.white,
-      drawer: MyDrawer(),
-
-
     );
   }
 }
-
 String searchAddress;
