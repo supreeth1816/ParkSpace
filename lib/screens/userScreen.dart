@@ -24,7 +24,6 @@ class _UserScreenState extends State<UserScreen> {
   var _isCar = true;
   var color1 = Colors.deepPurple;
   var color2 = Colors.grey;
- // var containerHeight = 220.0;
 
   @override
   void initState() {
@@ -100,12 +99,10 @@ class _UserScreenState extends State<UserScreen> {
                             child: Container(
                               width: 250,
                               child: TextField(
-
                                 onTap: (){
                                   print("Text field is tapped");
                                 },
                                 onChanged: (val){
-
                                   setState(() {
                                     searchAddress = val;
                                   });
@@ -136,10 +133,9 @@ class _UserScreenState extends State<UserScreen> {
                         right: 0.0,
                         bottom: 0.0,
                         child: Container(
-
-                            padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+                          padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
                             //height: containerHeight,
-                          height: 220.0,
+                          height: 270.0,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
@@ -155,12 +151,12 @@ class _UserScreenState extends State<UserScreen> {
                                   ),),
                               ],
                             ),
+
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-
+                                //Grey Button
                                 GestureDetector(
-
                                   onTap: getAllMarkers,
                                   child: Container(
                                     width: 44.0,
@@ -173,6 +169,62 @@ class _UserScreenState extends State<UserScreen> {
                                     ),
                                   ),
                                 ),
+
+
+                                ListTile(
+                                  contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 16, ),
+                                  title: Container(
+                                    padding: EdgeInsets.only(bottom: 6),
+                                    child: Text(
+                                      "Alex's Parking Space",
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    "Rs 150 / hr",
+                                  ),
+
+                                  trailing: SizedBox(
+                                    width: 106,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                width: 12,
+                                                height: 12,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                              SizedBox(width: 10,),
+                                              Text(
+                                                "Available",
+                                           //     style: whiteSubHeadingTextStyle.copyWith(color: Colors.green, fontSize: 14),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Row(
+
+                                            children: [
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+
 
                                 // _buildLocationInfo(),
                               ],
@@ -193,8 +245,7 @@ class _UserScreenState extends State<UserScreen> {
 
       appBar: AppBar(
 
-
-            centerTitle: true,
+        centerTitle: true,
 
         //AppBar Title
             title: NavTitle(),
@@ -212,6 +263,7 @@ class _UserScreenState extends State<UserScreen> {
             ),
 
         actions: <Widget>[
+
           Column(
             children: [
               SizedBox(height: 4,),
@@ -241,7 +293,6 @@ class _UserScreenState extends State<UserScreen> {
                 padding: EdgeInsets.only(top: 0),
                 height: 3.0,
                 width: 12.0,
-
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: _isCar ? Colors.deepPurple : Colors.transparent,
@@ -263,7 +314,6 @@ class _UserScreenState extends State<UserScreen> {
                         icon: Icon(
                           FontAwesomeIcons.biking,
                           size: 17,
-
                         ),
                         color: _isBike ? Colors.deepPurple : Colors.grey,
 

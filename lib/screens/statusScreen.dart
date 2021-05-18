@@ -183,7 +183,6 @@ class _StatusScreenState extends State<StatusScreen> {
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           color: Colors.green,
-
                                         ),
                                       ),
                                       SizedBox(width: 10,),
@@ -196,8 +195,8 @@ class _StatusScreenState extends State<StatusScreen> {
                                 ),
                                 Expanded(
                                   child: Row(
-                                    children: [
 
+                                    children: [
                                       Text(
                                         "₹ 106.20"
                                       ),
@@ -206,7 +205,6 @@ class _StatusScreenState extends State<StatusScreen> {
                                         Icons.push_pin,
                                         color: Colors.blueAccent,
                                       ),
-
                                     ],
                                   ),
                                 ),
