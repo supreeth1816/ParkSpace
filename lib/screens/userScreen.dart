@@ -177,15 +177,22 @@ class _UserScreenState extends State<UserScreen> {
                                     padding: EdgeInsets.only(bottom: 6),
                                     child: Text(
                                       "Alex's Parking Space",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.black87,
-                                        fontWeight: FontWeight.w600,
+                                      style: GoogleFonts.quicksand(
+
+                                        fontSize: 20.0,
+
+                                        color: Color(0xff7248bc),
+                                        fontWeight: FontWeight.w800,
                                       ),
                                     ),
                                   ),
                                   subtitle: Text(
-                                    "Rs 150 / hr",
+                                    "Rs. 216.06/h",
+                                    style: GoogleFonts.quicksand(
+                                      color: Color(0xff8A8A8A),
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
 
                                   trailing: SizedBox(
@@ -201,12 +208,16 @@ class _UserScreenState extends State<UserScreen> {
                                                 height: 12,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: Colors.green,
+                                                  color: Color(0xff33c642),
                                                 ),
                                               ),
-                                              SizedBox(width: 10,),
+                                              SizedBox(width: 9,),
                                               Text(
                                                 "Available",
+                                           style: GoogleFonts.quicksand(
+                                             color: Color(0xff33c642),
+                                             fontWeight: FontWeight.w500,
+                                           ),
                                            //     style: whiteSubHeadingTextStyle.copyWith(color: Colors.green, fontSize: 14),
                                               ),
                                             ],
