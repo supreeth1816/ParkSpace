@@ -7,6 +7,8 @@ ParkSpace - Smart parking monitoring and management app
 - Dynamic Pricing
 - Parking status tracking using IOT
 
+- NodeMCU, Ultrasonic sensor
+
 
 Design file:
 https://www.figma.com/file/WfSvZTCcX0O0mLeOX1SIuf/ParkSpace?node-id=0%3A1
