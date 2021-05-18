@@ -240,7 +240,7 @@ class _UserScreenState extends State<UserScreen> {
                         child: Container(
                           padding: EdgeInsets.fromLTRB(18, 10, 16, 10),
                             //height: containerHeight,
-                          height: 270.0,
+                          height: 280.0,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
@@ -276,7 +276,7 @@ class _UserScreenState extends State<UserScreen> {
                                   ),
                                 ),
 
-                                SizedBox(height: 6,),
+                                SizedBox(height: 8,),
 
                                 //Parking details tile
                                 ListTile(
