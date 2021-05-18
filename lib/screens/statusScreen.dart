@@ -104,7 +104,6 @@ class _StatusScreenState extends State<StatusScreen> {
                         fontSize: 18.0,
                         color: Colors.black87,
                         fontWeight: FontWeight.bold
-
                       ),
                     ),
                     SizedBox(

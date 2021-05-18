@@ -127,7 +127,8 @@ class _UserScreenState extends State<UserScreen> {
                         ],
                       ),
 
-                      //Bottom Tabs
+
+                      //Main Bottom View
                       Positioned(
                         left: 0.0,
                         right: 0.0,
@@ -155,7 +156,8 @@ class _UserScreenState extends State<UserScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                //Grey Button
+
+                                //Grey Pull Button
                                 GestureDetector(
                                   onTap: getAllMarkers,
                                   child: Container(
@@ -170,17 +172,17 @@ class _UserScreenState extends State<UserScreen> {
                                   ),
                                 ),
 
+                                SizedBox(height: 6,),
 
+                                //Parking details tile
                                 ListTile(
-                                  contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 16, ),
+                                  contentPadding: EdgeInsets.only(top: 10, bottom: 0, left: 16, ),
                                   title: Container(
                                     padding: EdgeInsets.only(bottom: 6),
                                     child: Text(
                                       "Alex's Parking Space",
                                       style: GoogleFonts.quicksand(
-
                                         fontSize: 20.0,
-
                                         color: Color(0xff7248bc),
                                         fontWeight: FontWeight.w800,
                                       ),
@@ -235,8 +237,60 @@ class _UserScreenState extends State<UserScreen> {
                                   ),
                                 ),
 
+                                //Select time tile
+                                ListTile(
+                                  contentPadding: EdgeInsets.only(top: 0, bottom: 0),
+                                  title: Container(
+                                    padding: EdgeInsets.only(bottom: 2),
+                                    child: Text(
+                                      "Select Time",
+                                      style: GoogleFonts.quicksand(
+                                        fontSize: 16.0,
+                                        color: Color(0xff868686),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    "Today, 2:00 PM"
+                                        ,style: GoogleFonts.quicksand(
+                                    color: Color(0xff8a8a8a),
+                                  ),
+                                  ),
+                                  leading: Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Image.asset(
+                                        "assets/time.png",
+                                        width: 48,
+                                        height: 48,
+                                      ),
 
+                                  ),
+                                  trailing: SizedBox(
+                                    width: 68,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Row(
+                                            children: <Widget>[
 
+                                              SizedBox(width: 10,),
+                                              Icon(Icons.keyboard_arrow_down_rounded, size: 29,
+                                                color: Color(0xff8a8a8a),),
+                                            ],
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                Container(
+                                  width: ,
+
+                                ),
                                 // _buildLocationInfo(),
                               ],
                             ),

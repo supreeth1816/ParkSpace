@@ -40,4 +40,5 @@ flutter:
     - assets/map_style.json
     - assets/icon.png
     - assets/car.png
+    - assets/time.png
 
