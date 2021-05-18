@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'marker.dart';
+import 'widgets/marker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'drawer.dart';
+import 'widgets/drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'navTitle.dart';
+import 'widgets/navTitle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
@@ -43,34 +43,6 @@ class _UserScreenState extends State<UserScreen> {
 
   };
 
-
-  // // Getting multiple markers from firebase
-  // void initMarker(specify, specifyId) async {
-  //   var markerIdVal = specifyId;
-  //   final MarkerId myMarkerId = MarkerId(markerIdVal);
-  //   final Marker myMarker = Marker(
-  //       markerId: myMarkerId,
-  //       position: LatLng(specify['location'].latitude, specify['location'].longitude),
-  //       infoWindow: InfoWindow(title: specify['address'], snippet: specify['price']),
-  //       icon: mapMarker,
-  //
-  //   );
-  //
-  //   setState(() {
-  //     myMarkers[myMarkerId] = myMarker;
-  //   });
-  // }
-
-  //
-  // getMarkerData() async {
-  //   FirebaseFirestore.instance.collection('data').get().then((myMockData) {
-  //     if(myMockData.docs.isNotEmpty){
-  //       for(int i=0; i < myMockData.docs.length; i++){
-  //         initMarker(myMockData.docs[i].data, myMockData.docs[i].id);
-  //       }
-  //     }
-  //   });
-  // }
 
 
   @override

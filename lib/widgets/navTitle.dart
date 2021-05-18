@@ -22,7 +22,6 @@ class NavTitle extends StatelessWidget {
 
               textStyle: TextStyle(
                   color: Colors.deepPurple, fontSize: 18, fontWeight: FontWeight.w500),
-
             ),
         ),
         ],
