@@ -1,49 +1,30 @@
-import 'dart:async';
-import 'widgets/marker.dart';
+import '../widgets/marker.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
-import 'widgets/drawer.dart';
+import '../widgets/drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'widgets/navTitle.dart';
+import '../widgets/navTitle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:line_icons/line_icon.dart';
+import 'package:parkspace/mapData.dart';
+
+
 
 class UserScreen extends StatefulWidget {
-
   @override
   _UserScreenState createState() => _UserScreenState();
 }
-
-
 
 class _UserScreenState extends State<UserScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 
   //initialising the controller for google map
-  Completer<GoogleMapController> _controllerGoogleMap = Completer();
-  GoogleMapController _controller;
   var _isBike = false;
   var _isCar = true;
   var color1 = Colors.deepPurple;
   var color2 = Colors.grey;
  // var containerHeight = 220.0;
-
-
-  // // List of all markers
-  // Map<MarkerId, Marker> myMarkers= <MarkerId , Marker>{};
-
-
-// Using set becuase all points are unique
-  Set<Marker> _markers = {
-
-  };
-
-
 
   @override
   void initState() {
@@ -53,116 +34,9 @@ class _UserScreenState extends State<UserScreen> {
 
   }
 
-
-
-  void _onMapCreated(GoogleMapController controller) {
-
-  _controllerGoogleMap.complete(controller);
-  _controller = controller;
-  isMapCreated = true;
-  locatePosition();
-  getMapMode();
-
-  // _setMapPins();
-
-  setState(() {
-
-    _markers.add(
-        Marker(
-          markerId: MarkerId("parking - 1"),
-          position: LatLng(12.9717, 79.1594),
-          icon: mapMarker,
-          infoWindow: InfoWindow(
-            title: "New Parking Slot",
-            snippet: "Rs 150/hr"
-          ),
-        )
-
-    );
-  });
-  }
-
-  Position currentPosition;
-  var geoLocator = Geolocator();
-
-
-  //Method called when map is initialised
-  void locatePosition() async
-  {
-
-    //position is method variable
-    //currentPosition is file variable
-    //getting position through inbuilt method of geolocator class
-
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    currentPosition = position;
-    LatLng myPos = LatLng(position.latitude, position.longitude);
-
-    CameraPosition cameraPosition = CameraPosition(
-        target: myPos,
-        zoom: 16.4746);
-    
-    _controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-
-  }
-
-
-  bool isMapCreated = false;
-
-
-  //default location
-  static final LatLng myLocation = LatLng(13.9717, 79.1594);
-  //zoom for the default location
-  final CameraPosition parkingLocation = CameraPosition(
-    target: myLocation,
-    zoom: 16.4746,
-  );
-
-
-  //Setting Map Style
-  getMapMode() {
-    getJsonFile("assets/map_style.json").then(setMapStyle);
-  }
-
-
-  Future<String> getJsonFile(String path) async {
-    return await rootBundle.loadString(path);
-  }
-
-  void setMapStyle(String mapStyle) {
-    _controller.setMapStyle(mapStyle);
-  }
-
-
-
-  String searchAddress;
-
-  //Method called when search button is clicked
-  searchAndNavigate(){
-      print(searchAddress);
-      _controller.animateCamera(CameraUpdate.newCameraPosition(parkingLocation));
-
-      //print(myMarkers);
-      FirebaseFirestore.instance
-          .collection('test')
-          .add({'text': 'data added through app'});
-  }
-
-  getAllMarkers(){
-    print("markers: ");
-    print(_markers);
-  //  containerHeight = 200.0;
-  }
-
-
   @override
   Widget build(BuildContext context) {
 
-    if (isMapCreated) {
-      getMapMode();
-    }
     return Scaffold(
       extendBodyBehindAppBar: true,
       key: _scaffoldKey,
@@ -179,24 +53,11 @@ class _UserScreenState extends State<UserScreen> {
                   width: MediaQuery.of(context).size.width,
                   child: Stack(
                     children: [
-
                       // Google Map
                       Container(
                         height: MediaQuery.of(context).size.height - 202,
 
-
-                        child: GoogleMap(
-                          trafficEnabled: true,
-                          mapType: MapType.normal,
-                          zoomControlsEnabled: true,
-                          myLocationButtonEnabled: false,
-                          myLocationEnabled: true,
-                          zoomGesturesEnabled: true,
-                          onMapCreated: _onMapCreated,
-                          //  markers: Set<Marker>.of(myMarkers.values),
-                          markers: _markers,
-                          initialCameraPosition: parkingLocation,
-                        ),
+                        child: MapData(),
                       ),
 
                       Stack(
@@ -243,11 +104,8 @@ class _UserScreenState extends State<UserScreen> {
                                 onTap: (){
                                   print("Text field is tapped");
                                 },
-
                                 onChanged: (val){
 
-                                  // print("Value changed : ");
-                                  // print(searchAddress);
                                   setState(() {
                                     searchAddress = val;
                                   });
@@ -268,20 +126,11 @@ class _UserScreenState extends State<UserScreen> {
                                           fontWeight: FontWeight.bold
                                       ),),
                                     onTap: searchAndNavigate,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                          ),
+                                  ),),),),),
                         ],
                       ),
 
-
-
                       //Bottom Tabs
-
-
                       Positioned(
                         left: 0.0,
                         right: 0.0,
@@ -303,8 +152,7 @@ class _UserScreenState extends State<UserScreen> {
                                   blurRadius: 30.0,
                                   offset: Offset(
                                     0,-20
-                                  ),
-                                ),
+                                  ),),
                               ],
                             ),
                             child: Column(
@@ -323,8 +171,6 @@ class _UserScreenState extends State<UserScreen> {
                                        Radius.circular(10.0),
                                       ),
                                     ),
-
-
                                   ),
                                 ),
 
@@ -339,7 +185,6 @@ class _UserScreenState extends State<UserScreen> {
                 SizedBox(
                   height: 10.0,
                 ),
-
               ],
             ),
           ),
@@ -355,8 +200,7 @@ class _UserScreenState extends State<UserScreen> {
             title: NavTitle(),
             backgroundColor: Colors.white,
 
-
-            //Hamburger Menu icon
+        //Hamburger Menu icon
             leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.bars,
@@ -387,14 +231,11 @@ class _UserScreenState extends State<UserScreen> {
                     setState(() {
                       _isCar = true;
                       _isBike = false;
-
                     });
                     print("Selected Car");
                   },
                 ),
               ),
-
-
 
               Container(
                 padding: EdgeInsets.only(top: 0),
@@ -406,8 +247,6 @@ class _UserScreenState extends State<UserScreen> {
                   color: _isCar ? Colors.deepPurple : Colors.transparent,
                 ),
               ),
-
-
             ],
           ),
 
@@ -432,7 +271,6 @@ class _UserScreenState extends State<UserScreen> {
                           setState(() {
                             _isBike = true;
                             _isCar = false;
-
                           });
                           print("Selected Bike");
                         },
@@ -448,7 +286,6 @@ class _UserScreenState extends State<UserScreen> {
                         color: _isBike ? Colors.deepPurple : Colors.transparent,
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -462,12 +299,7 @@ class _UserScreenState extends State<UserScreen> {
 
 
     );
-
-
-
-
-
   }
 }
 
-
+String searchAddress;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:parkspace/widgets/primaryButton.dart';
 
 
 class StartScreen extends StatefulWidget {
@@ -133,19 +134,10 @@ class _StartScreenState extends State<StartScreen> {
                     btnText: "Login",
                   ),
                 ),
+
                 SizedBox(
                   height: 14,
                 ),
-
-
-                // GestureDetector(
-                //   onTap: () {
-                //     Navigator.pushNamed(context, '/vendor');
-                //   },
-                //   child: OutlineBtn(
-                //     btnText: "Sign Up",
-                //   ),
-                // ),
 
                 Container(
                     padding: EdgeInsets.all(10),
@@ -185,67 +177,4 @@ class _StartScreenState extends State<StartScreen> {
 }
 
 
-
-class PrimaryButton extends StatefulWidget {
-  final String btnText;
-  PrimaryButton({this.btnText});
-
-  @override
-  _PrimaryButtonState createState() => _PrimaryButtonState();
-}
-
-class _PrimaryButtonState extends State<PrimaryButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.deepPurple,
-          borderRadius: BorderRadius.circular(15)
-      ),
-      padding: EdgeInsets.all(15),
-      child: Center(
-        child: Text(
-          widget.btnText,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 16
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class OutlineBtn extends StatefulWidget {
-  final String btnText;
-  OutlineBtn({this.btnText});
-
-  @override
-  _OutlineBtnState createState() => _OutlineBtnState();
-}
-
-class _OutlineBtnState extends State<OutlineBtn> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.deepPurple,
-              width: 2
-          ),
-          borderRadius: BorderRadius.circular(15)
-      ),
-      padding: EdgeInsets.all(15),
-      child: Center(
-        child: Text(
-          widget.btnText,
-          style: TextStyle(
-              color: Colors.deepPurple,
-              fontSize: 16
-          ),
-        ),
-      ),
-    );
-  }
-}
 

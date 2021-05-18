@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/drawer.dart';
+import '../widgets/drawer.dart';
 
 
 class StatusScreen extends StatefulWidget {

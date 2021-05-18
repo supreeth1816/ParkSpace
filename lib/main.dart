@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'vendorScreen.dart';
-import 'userScreen.dart';
-import 'startScreen.dart';
-import 'statusScreen.dart';
+import 'screens/vendorScreen.dart';
+import 'screens/userScreen.dart';
+import 'screens/startScreen.dart';
+import 'screens/statusScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {

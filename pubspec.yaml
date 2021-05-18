@@ -25,6 +25,7 @@ dependencies:
   google_fonts: ^2.0.0
   font_awesome_flutter: ^9.0.0
   line_icons: ^2.0.1
+  sliding_up_panel: ^2.0.0+1
   
 dev_dependencies:
   flutter_test:
