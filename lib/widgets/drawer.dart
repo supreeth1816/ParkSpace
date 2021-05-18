@@ -10,7 +10,7 @@ class _MyDrawerState extends State<MyDrawer> {
   final name = 'Supreeth';
   final email = 'supreet.venkata@gmail.com';
   final urlImage =
-      'https://media-exp1.licdn.com/dms/image/C5603AQF5ALwmAR9gQw/profile-displayphoto-shrink_400_400/0/1620456844103?e=1625702400&v=beta&t=uRdrGz45nIQ9Y_rnuAga_E0dxM1xA8wI-V1U8Wpf1tw';
+      'https://media-exp1.licdn.com/dms/image/C5603AQEpW-HYtoueUQ/profile-displayphoto-shrink_400_400/0/1620761746684?e=1626912000&v=beta&t=p1ViNjbgGYGWpZtYVuqzdjEMZ8xRNPEcMRd2XPH3hmQ';
 
   Widget buildHeader({
     @required String urlImage,
@@ -79,27 +79,6 @@ class _MyDrawerState extends State<MyDrawer> {
 
 
 
-  //
-      // OutlinedButton(
-      //
-      //   onPressed: null,
-      //   style: ButtonStyle(
-      //     shape: MaterialStateProperty.all(
-      //         RoundedRectangleBorder(
-      //             borderRadius: BorderRadius.circular(5.0),
-      //
-      //         ),
-      //     ),
-      //   ),
-      //   child: const Text("Find Parking Slot",
-      //   style: TextStyle(
-      //     color: Colors.white,
-      //     fontWeight: FontWeight.w400,
-      //     fontSize: 18.0,
-      //
-      //   ),),
-      // ),
-
 
 
   Widget buildMenuItem({
@@ -143,7 +122,7 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.deepPurple,
+        color: Color(0xff823dc9),
         child: ListView(
           children: <Widget>[
             buildHeader(

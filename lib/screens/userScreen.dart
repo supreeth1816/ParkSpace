@@ -412,7 +412,7 @@ class _UserScreenState extends State<UserScreen> {
                                         child:
                                         Text("More Details",
                                         style: GoogleFonts.quicksand(
-                                          fontSize: 18,
+                                          fontSize: 17,
                                           color: Color(0xffaf76ea),
                                           fontWeight: FontWeight.w800
 
@@ -424,19 +424,19 @@ class _UserScreenState extends State<UserScreen> {
 
                                       Container(
                                       //  width: 150,
-                                        padding: EdgeInsets.only(top: 15, bottom: 15, left: 56, right: 56),
+                                        padding: EdgeInsets.only(top: 14, bottom: 14, left: 54, right: 54),
                                         margin: EdgeInsets.only(left: 10),
 
                                         decoration: BoxDecoration(
                                           color: Color(0xffaf76ea),
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius: BorderRadius.circular(12),
 
                                         ),
                                         child:
                                         Text("Book Slot",
                                         style: GoogleFonts.quicksand(
                                           color: Colors.white,
-                                          fontSize: 18,
+                                          fontSize: 17,
                                             fontWeight: FontWeight.w800,
                                         ),),
                                       ),
