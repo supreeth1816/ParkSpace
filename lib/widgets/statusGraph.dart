@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:async';
 
 //final databaseReference = FirebaseDatabase.instance.reference();
 
@@ -22,35 +23,21 @@ class _StatusGraphState extends State<StatusGraph> {
   final int sizeOfArray = 10;
 
 
-  Future<void> fetchData() async {
+  Future<void> fetchDistance() async {
     final response = await http
         .get(Uri.parse("https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/parkingdistance.json"));
     print(json.decode(response.body));
+
   }
 
-  // void createRecord(){
-  //   databaseReference.child("1").set({
-  //     'title': 'Mastering EJB',
-  //     'description': 'Programming Guide for J2EE'
-  //   });
-  //   databaseReference.child("2").set({
-  //     'title': 'Flutter in Action',
-  //     'description': 'Complete Programming Guide to learn Flutter'
-  //   });
-  // }
-  //
-  // void addData() {
-  //   databaseReference.push().set({'name': 'abc', 'comment': 'A good season'});
-  // }
-  //
-  // void readData(){
-  //   print("Reading data: ");
-  //   print(databaseReference);
-  //
-  //   databaseReference.once().then((DataSnapshot snapshot) {
-  //     print('Data : ${snapshot.value}');
-  //   });
-  // }
+  Stream<void> distanceStream() async* {
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 500));
+      double distance = (await http
+          .get(Uri.parse("https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/parkingdistance.json"))) as double;
+      yield distance;
+    }
+  }
 
   List<double> setDataSet(List<double> currentDataSet,
       List<double> previousDataSet, double newData) {
@@ -68,17 +55,22 @@ class _StatusGraphState extends State<StatusGraph> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
+    return StreamBuilder<List<double>>(
+      stream: null,
+      builder: (context, snapshot) {
+        return Container(
+          child: Column(
+            children: [
 
-          MaterialButton(onPressed: fetchData,
-          child: Text("Click to add data"),),
+              MaterialButton(onPressed: fetchData,
+              child: Text("Click to add data"),),
 
 
-        ],
+            ],
 
-      ),
+          ),
+        );
+      }
     );
   }
 }
