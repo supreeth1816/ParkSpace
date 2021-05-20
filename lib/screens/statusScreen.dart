@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:parkspace/widgets/statusGraph.dart';
 import '../widgets/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -51,7 +52,7 @@ class _StatusScreenState extends State<StatusScreen> {
 
   ChartSeriesController _chartSeriesController;
   List<double> chartData1 = <double>[
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    1, 8, 24, 6, 10, 152, 330, 20, 40, 1
   ];
 
   int count = 19;
@@ -107,7 +108,7 @@ class _StatusScreenState extends State<StatusScreen> {
         centerTitle: true,
 
         //AppBar Title
-        title: Text("ParkSpace", style: TextStyle(color: Colors.deepPurple),),
+        title: Text("Parking Status", style: GoogleFonts.quicksand(color: Colors.deepPurple, fontWeight: FontWeight.w800, fontSize: 18), ),
         backgroundColor: Colors.white,
 
         //Hamburger Menu icon
@@ -141,19 +142,10 @@ class _StatusScreenState extends State<StatusScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                "My Parking Status",
-                style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.1,
-                ),
-              ),
-            ),
 
+
+
+        //Status Graph
         Container(
           child: Column(
             children: [
@@ -164,27 +156,50 @@ class _StatusScreenState extends State<StatusScreen> {
               // MaterialButton(onPressed: chart,
               //   child: Text("Click to add data"),),
 
-
               Container(
-                height: 140, width: 356,
-                margin: EdgeInsets.only(right: 20, left: 20),
-                padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color(0xfff3e7ff),
+                  height: 140, width: 356,
+                  margin: EdgeInsets.only(right: 20, left: 20),
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xfff3e7ff),
+                  ),
+                  child: GestureDetector(
+                    onTap: _updateDataSource,
+                    child: Sparkline(
+                      //fallbackHeight: 80,
+                      data: chartData1,
+                      pointsMode: PointsMode.last,
+                      pointSize: 8.0,
+                      pointColor: Color(0xff7127a7),
+                      lineWidth: 3,
+                      lineColor: Color(0xffa647e9),
+                    ),
+                  ),
                 ),
-                child: Sparkline(
-                  //fallbackHeight: 80,
-                  data: chartData1,
-                  lineWidth: 3,
-                  lineColor: Color(0xffa647e9),
-                ),
-              ),
+
             ],
 
           ),
         ),
 
+            //Slot name
+            Padding(
+              padding: const EdgeInsets.only(left: 106, right: 0, top: 20, bottom: 20),
+              child: Text(
+                "Alex's parking slot",
+                style: GoogleFonts.quicksand(
+                  fontSize: 20.0,
+                  color: Color(0xff7127a7),
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.1,
+                ),
+              ),
+            ),
+
+
+
+            //View All Parking Slots
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) {
