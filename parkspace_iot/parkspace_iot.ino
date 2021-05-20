@@ -1,18 +1,21 @@
 #include <ESP8266WiFi.h>
+#include <FirebaseESP8266.h>
 
-#include <FirebaseESP8266.h>                         
 #define FIREBASE_HOST "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/"
 #define FIREBASE_AUTH "a3KBYGWA7k2RNoMkto99g6ODjtdba9drCIwlzxgN"
 #define WIFI_SSID "ACTFIBERNET" 
 #define WIFI_PASSWORD "act12345"
 FirebaseData firebaseData;
+
+
 const int trig1=D0;
 const int echo1=D1;
 String status;
 long duration;
 int distance;
 void setup() {
-     pinMode(trig1, OUTPUT);
+
+  pinMode(trig1, OUTPUT);
   pinMode(echo1, INPUT);
     Serial.begin(115200);                                                      
   Serial.println("Serial communication started\n\n");  

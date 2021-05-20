@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:parkspace/widgets/statusGraph.dart';
 import '../widgets/drawer.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
+
 
 
 class StatusScreen extends StatefulWidget {
@@ -9,6 +17,13 @@ class StatusScreen extends StatefulWidget {
 }
 
 class _StatusScreenState extends State<StatusScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _updateDataSource();
+    super.initState();
+  }
 
   final TextStyle whiteNameTextStyle = TextStyle(
     fontSize: 24.0,
@@ -28,7 +43,56 @@ class _StatusScreenState extends State<StatusScreen> {
     letterSpacing: 5,
   );
 
+
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+
+
+  ChartSeriesController _chartSeriesController;
+  List<double> chartData1 = <double>[
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  ];
+
+  int count = 19;
+  void _updateDataSource() async {
+
+    int a = chartData1.length - 1;
+
+
+    final response = await http
+        .get(Uri.parse(
+        "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/parkingdistance.json"));
+    double distance = json.decode(response.body).toDouble();
+    chartData1.add(distance);
+
+    if (chartData1.length >= 10) {
+      // Removes the last index data of data source.
+      chartData1.removeAt(0);
+      // Here calling updateDataSource method with addedDataIndexes to add data in last index and removedDataIndexes to remove data from the last.
+      _chartSeriesController?.updateDataSource(
+          addedDataIndexes: <int>[a],
+          removedDataIndexes: <int>[0]);
+    }
+    count = count + 1;
+  }
+
+
+
+  Future<void> fetchDistance() async {
+    final response = await http
+        .get(Uri.parse(
+        "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/parkingdistance.json"));
+    int distance = json.decode(response.body);
+    return distance;
+    // print(distance);
+  }
+
+
+  void chart() {
+    print(chartData1);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +121,19 @@ class _StatusScreenState extends State<StatusScreen> {
         shadowColor: Colors.white,
         elevation: 0,
 
+        actions: <Widget>[
+      IconButton(
+      splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        icon: Icon(
+          Icons.refresh,
+          size: 20,
+           color: Colors.deepPurple,
+        ),
+        onPressed: _updateDataSource,
+      ),
+        ],
+
       ),
       body: Container(
         color: Colors.white,
@@ -77,51 +154,37 @@ class _StatusScreenState extends State<StatusScreen> {
               ),
             ),
 
-            StatusGraph(),
+        Container(
+          child: Column(
+            children: [
 
-            // Card(
-            //   elevation: 8,
-            //   shadowColor: Colors.black45,
-            //   shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.circular(16),
-            //   ),
-            //   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 8),
-            //     child: TextField(
-            //       decoration: InputDecoration(
-            //           border: InputBorder.none,
-            //           prefixIcon: Icon(Icons.search),
-            //           hintText: "Search",
-            //           hintStyle: whiteSubHeadingTextStyle.copyWith(color: Colors.black87)),
-            //     ),
-            //   ),
-            // ),
-            // Padding(
-            //     padding: const EdgeInsets.all(16),
-            //     child: Row(
-            //       children: <Widget>[
-            //         Text(
-            //           "Refresh",
-            //           style: TextStyle(
-            //             fontSize: 18.0,
-            //             color: Colors.black87,
-            //             fontWeight: FontWeight.bold
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           width: 20,
-            //         ),
-            //         Icon(
-            //           Icons.refresh,
-            //         ),
-            //         Spacer(),
-            //         // Text(
-            //         //   "1h",
-            //         //   style: subTitleStyle.copyWith(color: Colors.black),
-            //         // ),
-            //       ],
-            //     )),
+              // MaterialButton(onPressed: fetchDistance,
+              //   child: Text("Click to add data"),),
+              //
+              // MaterialButton(onPressed: chart,
+              //   child: Text("Click to add data"),),
+
+
+              Container(
+                height: 140, width: 356,
+                margin: EdgeInsets.only(right: 20, left: 20),
+                padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Color(0xfff3e7ff),
+                ),
+                child: Sparkline(
+                  //fallbackHeight: 80,
+                  data: chartData1,
+                  lineWidth: 3,
+                  lineColor: Color(0xffa647e9),
+                ),
+              ),
+            ],
+
+          ),
+        ),
+
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) {
@@ -232,3 +295,92 @@ class _StatusScreenState extends State<StatusScreen> {
     );
   }
 }
+
+//
+//
+// int count = 19;
+// void _updateDataSource(Timer timer) async {
+//
+//   int a = chartData1.length - 1;
+//
+//
+//   final response = await http
+//       .get(Uri.parse(
+//       "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/parkingdistance.json"));
+//   double distance = json.decode(response.body).toDouble();
+//   chartData1.add(distance);
+//
+//   if (chartData1.length >= 10) {
+//     // Removes the last index data of data source.
+//     chartData1.removeAt(0);
+//     // Here calling updateDataSource method with addedDataIndexes to add data in last index and removedDataIndexes to remove data from the last.
+//     _chartSeriesController?.updateDataSource(
+//         addedDataIndexes: <int>[a],
+//         removedDataIndexes: <int>[0]);
+//   }
+//   count = count + 1;
+// }
+//
+//
+// class StatusGraph extends StatefulWidget {
+//
+//
+//   @override
+//   _StatusGraphState createState() => _StatusGraphState();
+// }
+//
+// class _StatusGraphState extends State<StatusGraph> {
+//
+//
+//
+//
+//   Timer timer;
+//   int count = 19;
+//
+//   final int sizeOfArray = 10;
+//
+//
+//
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // timer =
+//     //     Timer.periodic(const Duration(milliseconds: 500), _updateDataSource);
+//     return StreamBuilder<List<double>>(
+//         stream: null,
+//         builder: (context, snapshot) {
+//           return Container(
+//             child: Column(
+//               children: [
+//
+//                 MaterialButton(onPressed: fetchDistance,
+//                   child: Text("Click to add data"),),
+//
+//                 MaterialButton(onPressed: chart,
+//                   child: Text("Click to add data"),),
+//
+//
+//                 Container(
+//                   height: 100, width: 356,
+//                   margin: EdgeInsets.only(right: 20, left: 20),
+//                   padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(20),
+//                     color: Color(0xfff3e7ff),
+//                   ),
+//                   child: Sparkline(
+//                     //fallbackHeight: 80,
+//                     data: chartData1,
+//                     lineWidth: 3,
+//                     lineColor: Color(0xffa647e9),
+//                   ),
+//                 ),
+//               ],
+//
+//             ),
+//           );
+//         }
+//     );
+//   }
+// }
