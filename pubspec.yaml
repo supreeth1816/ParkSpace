@@ -28,6 +28,7 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   flutter_sparkline: ^0.1.0
   firebase_database: ^6.1.2
+  syncfusion_flutter_charts: ^19.1.64
   
 dev_dependencies:
   flutter_test:
