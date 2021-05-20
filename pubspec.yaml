@@ -26,6 +26,8 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   line_icons: ^2.0.1
   sliding_up_panel: ^2.0.0+1
+  flutter_sparkline: ^0.1.0
+  firebase_database: ^6.1.2
   
 dev_dependencies:
   flutter_test:

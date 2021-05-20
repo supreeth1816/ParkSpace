@@ -51,8 +51,8 @@ class _MapDataState extends State<MapData> {
             position: LatLng(12.9717, 79.1594),
             icon: mapMarker,
             infoWindow: InfoWindow(
-                title: "New Parking Slot",
-                snippet: "Rs 150/hr"
+                title: "Alex's Parking Space",
+                snippet: "Rs 216.06/hr"
             ),
           )
       );

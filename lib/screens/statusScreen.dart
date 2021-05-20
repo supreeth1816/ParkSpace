@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkspace/widgets/statusGraph.dart';
 import '../widgets/drawer.dart';
 
 
@@ -76,49 +77,51 @@ class _StatusScreenState extends State<StatusScreen> {
               ),
             ),
 
-            Card(
-              elevation: 8,
-              shadowColor: Colors.black45,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.search),
-                      hintText: "Search",
-                      hintStyle: whiteSubHeadingTextStyle.copyWith(color: Colors.black87)),
-                ),
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      "Refresh",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Icon(
-                      Icons.refresh,
-                    ),
-                    Spacer(),
-                    // Text(
-                    //   "1h",
-                    //   style: subTitleStyle.copyWith(color: Colors.black),
-                    // ),
-                  ],
-                )),
+            StatusGraph(),
+
+            // Card(
+            //   elevation: 8,
+            //   shadowColor: Colors.black45,
+            //   shape: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(16),
+            //   ),
+            //   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 8),
+            //     child: TextField(
+            //       decoration: InputDecoration(
+            //           border: InputBorder.none,
+            //           prefixIcon: Icon(Icons.search),
+            //           hintText: "Search",
+            //           hintStyle: whiteSubHeadingTextStyle.copyWith(color: Colors.black87)),
+            //     ),
+            //   ),
+            // ),
+            // Padding(
+            //     padding: const EdgeInsets.all(16),
+            //     child: Row(
+            //       children: <Widget>[
+            //         Text(
+            //           "Refresh",
+            //           style: TextStyle(
+            //             fontSize: 18.0,
+            //             color: Colors.black87,
+            //             fontWeight: FontWeight.bold
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           width: 20,
+            //         ),
+            //         Icon(
+            //           Icons.refresh,
+            //         ),
+            //         Spacer(),
+            //         // Text(
+            //         //   "1h",
+            //         //   style: subTitleStyle.copyWith(color: Colors.black),
+            //         // ),
+            //       ],
+            //     )),
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) {
