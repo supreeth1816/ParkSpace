@@ -59,22 +59,20 @@ class _MapDataState extends State<MapData> {
     });
   }
 
+
+
+
   Position currentPosition;
   var geoLocator = Geolocator();
 
   bool isMapCreated = false;
-
-
-
 
   //Setting Map Style
   getMapMode() {
     getJsonFile("assets/map_style.json").then(setMapStyle);
   }
 
-
-
-
+  //Get json file from path
   Future<String> getJsonFile(String path) async {
     return await rootBundle.loadString(path);
   }
@@ -83,13 +81,8 @@ class _MapDataState extends State<MapData> {
     _controller.setMapStyle(mapStyle);
   }
 
-
-  //Method called when map is initialised
   void locatePosition() async
   {
-    //position is method variable
-    //currentPosition is file variable
-    //getting position through inbuilt method of geolocator class
 
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -119,6 +112,7 @@ class _MapDataState extends State<MapData> {
       myLocationEnabled: true,
       zoomGesturesEnabled: true,
       onMapCreated: _onMapCreated,
+
       //  markers: Set<Marker>.of(myMarkers.values),
       markers: _markers,
       initialCameraPosition: parkingLocation,

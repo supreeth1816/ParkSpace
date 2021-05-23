@@ -8,6 +8,7 @@ ParkSpace - Smart parking monitoring and management app
 - Parking status tracking using IOT
 
 - NodeMCU, Ultrasonic sensor
+- Arduino code for parking status monitoring
 
 
 Design file:

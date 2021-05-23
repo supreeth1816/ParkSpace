@@ -56,10 +56,11 @@ class _StatusScreenState extends State<StatusScreen> {
   ];
 
   int count = 19;
+
+
   void _updateDataSource() async {
 
     int a = chartData1.length - 1;
-
 
     final response = await http
         .get(Uri.parse(
@@ -68,9 +69,10 @@ class _StatusScreenState extends State<StatusScreen> {
     chartData1.add(distance);
 
     if (chartData1.length >= 10) {
+
       // Removes the last index data of data source.
       chartData1.removeAt(0);
-      // Here calling updateDataSource method with addedDataIndexes to add data in last index and removedDataIndexes to remove data from the last.
+
       _chartSeriesController?.updateDataSource(
           addedDataIndexes: <int>[a],
           removedDataIndexes: <int>[0]);
@@ -142,8 +144,6 @@ class _StatusScreenState extends State<StatusScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(height: 20,),
-
-
 
         //Status Graph
         Container(
@@ -217,6 +217,7 @@ class _StatusScreenState extends State<StatusScreen> {
 
                           title: Container(
                             padding: EdgeInsets.only(bottom: 6),
+
                             child: Text(
                               "Parking Slot 1",
                               style: TextStyle(
@@ -298,10 +299,289 @@ class _StatusScreenState extends State<StatusScreen> {
                         width: 340,
                         color: Colors.grey.shade300,
                       ),
+
+                      Card(
+                        elevation: 0,
+
+                        shadowColor: Colors.white54,
+
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.only(top: 10, bottom: 10),
+
+                          title: Container(
+                            padding: EdgeInsets.only(bottom: 6),
+
+                            child: Text(
+                              "Parking Slot 2",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          subtitle: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Icon(
+                                Icons.location_on_outlined,
+                                color: Colors.black38,
+                              ),
+                              Text(
+                                "  Vellore",
+                                style: whiteSubHeadingTextStyle.copyWith(color: Colors.black38, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          leading: Container(
+                            padding: EdgeInsets.only(left: 10),
+                            child: ClipOval(
+                              child: Image.asset(
+                                "assets/icon.png",
+                                width: 60,
+                                height: 50,
+                              ),
+                            ),
+                          ),
+                          trailing: SizedBox(
+                            width: 106,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        width: 12,
+                                        height: 12,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10,),
+                                      Text(
+                                        "Slot Empty",
+                                        style: whiteSubHeadingTextStyle.copyWith(color: Colors.grey, fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+
+                                    children: [
+                                      Text(
+                                          "₹ 0.00"
+                                      ),
+                                      SizedBox(width: 20,),
+                                      Icon(
+                                        Icons.push_pin_outlined,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        height: 1.0,
+                        width: 340,
+                        color: Colors.grey.shade300,
+                      ),
+                      Card(
+                        elevation: 0,
+
+                        shadowColor: Colors.white54,
+
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.only(top: 10, bottom: 10),
+
+                          title: Container(
+                            padding: EdgeInsets.only(bottom: 6),
+
+                            child: Text(
+                              "Parking Slot 3",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          subtitle: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Icon(
+                                Icons.location_on_outlined,
+                                color: Colors.black38,
+                              ),
+                              Text(
+                                "  Vellore",
+                                style: whiteSubHeadingTextStyle.copyWith(color: Colors.black38, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          leading: Container(
+                            padding: EdgeInsets.only(left: 10),
+                            child: ClipOval(
+                              child: Image.asset(
+                                "assets/icon.png",
+                                width: 60,
+                                height: 50,
+                              ),
+                            ),
+                          ),
+                          trailing: SizedBox(
+                            width: 106,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        width: 12,
+                                        height: 12,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10,),
+                                      Text(
+                                        "Slot Empty",
+                                        style: whiteSubHeadingTextStyle.copyWith(color: Colors.grey, fontSize: 14),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+
+                                    children: [
+                                      Text(
+                                          "₹ 0.00"
+                                      ),
+                                      SizedBox(width: 20,),
+                                      Icon(
+                                        Icons.push_pin_outlined,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 1.0,
+                        width: 340,
+                        color: Colors.grey.shade300,
+                      ),
+                      Card(
+                        elevation: 0,
+
+                        shadowColor: Colors.white54,
+
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.only(top: 10, bottom: 10),
+
+                          title: Container(
+                            padding: EdgeInsets.only(bottom: 6),
+
+                            child: Text(
+                              "Parking Slot 4",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          subtitle: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Icon(
+                                Icons.location_on_outlined,
+                                color: Colors.black38,
+                              ),
+                              Text(
+                                "  Vellore",
+                                style: whiteSubHeadingTextStyle.copyWith(color: Colors.black38, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          leading: Container(
+                            padding: EdgeInsets.only(left: 10),
+                            child: ClipOval(
+                              child: Image.asset(
+                                "assets/icon.png",
+                                width: 60,
+                                height: 50,
+                              ),
+                            ),
+                          ),
+                          trailing: SizedBox(
+                            width: 106,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        width: 12,
+                                        height: 12,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10,),
+                                      Text(
+                                        "Slot Empty",
+                                        style: whiteSubHeadingTextStyle.copyWith(color: Colors.grey, fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+
+                                    children: [
+                                      Text(
+                                          "₹ 0.00"
+                                      ),
+                                      SizedBox(width: 20,),
+                                      Icon(
+                                        Icons.push_pin_outlined,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   );
                 },
-                itemCount: 10,
+                itemCount: 1,
               ),
             ),
           ],
