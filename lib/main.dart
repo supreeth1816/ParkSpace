@@ -25,6 +25,7 @@ class ParkspaceApp extends StatelessWidget {
           '/vendor': (context) => VendorScreen(),
           '/user': (context) => UserScreen(),
           '/status': (context) => StatusScreen(),
+          '/selectlocation': (context) => SelectLocationScreen(),
 
         },
       );
