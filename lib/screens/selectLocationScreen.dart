@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:parkspace/widgets/marker.dart';
 
 
 class SelectLocationScreen extends StatefulWidget {
@@ -12,6 +13,23 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
   List<Marker> myMarkers = [];
 
   _handleTap(LatLng tappedPoint){
+    print(tappedPoint);
+
+    setState(() {
+      myMarkers = [];
+      myMarkers.add(
+        Marker(
+          markerId: MarkerId(tappedPoint.toString()),
+          position: tappedPoint,
+          icon: mapMarker,
+
+
+        ),
+
+      );
+
+    });
+
     
   }
 
@@ -31,6 +49,8 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
         child: GoogleMap(
           initialCameraPosition: parkingLocation,
           markers: Set.from(myMarkers),
+
+          onTap: _handleTap,
 
 
         ),

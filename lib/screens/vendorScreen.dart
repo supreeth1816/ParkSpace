@@ -143,20 +143,27 @@ class _VendorScreenState extends State<VendorScreen> {
               ),
               SizedBox(height: 20,),
 
-              Row(
-              //  crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(width: 10,),
-                  Icon(Icons.location_on, color: Colors.deepPurple,),
-                  SizedBox(width: 10,),
 
-                  Text("Select Location", style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.deepPurple,
-                  ),),
-                ],
+
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, '/selectlocation'),
+                child: Container(
+                  child: Row(
+                    //  crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(width: 10,),
+                      Icon(Icons.location_on, color: Colors.deepPurple,),
+                      SizedBox(width: 10,),
+
+                      Text("Select Location", style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.deepPurple,
+                      ),),
+                    ],
+                  ),
+                ),
               ),
 
               SizedBox(height: 200,),
