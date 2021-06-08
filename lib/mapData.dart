@@ -8,6 +8,8 @@ import 'package:parkspace/screens/userScreen.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'models/markerData.dart';
+
 Set<Marker> _markers = {
 
 };
@@ -115,7 +117,7 @@ class _MapDataState extends State<MapData> {
 
 
       //  markers: Set<Marker>.of(myMarkers.values),
-      markers: _markers,
+      markers: Set.from(myMarkers),
       initialCameraPosition: parkingLocation,
     );
   }

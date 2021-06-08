@@ -57,6 +57,14 @@ class _StatusScreenState extends State<StatusScreen> {
 
   int count = 19;
 
+  var slotindex1text = "Slot Filled";
+  var slotindex1price = "106.20";
+  var slotColor = Colors.grey;
+
+
+
+
+
 
   void _updateDataSource() async {
 
@@ -64,7 +72,7 @@ class _StatusScreenState extends State<StatusScreen> {
 
     final response = await http
         .get(Uri.parse(
-        "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/parkingdistance.json"));
+        "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/slotindex1/parkingdistance.json"));
     double distance = json.decode(response.body).toDouble();
     chartData1.add(distance);
 
@@ -78,6 +86,27 @@ class _StatusScreenState extends State<StatusScreen> {
           removedDataIndexes: <int>[0]);
     }
     count = count + 1;
+
+    var doublePrice = double.parse(slotindex1price);
+
+
+    if (chartData1[9] < 20){
+      setState(() {
+        slotindex1text = "Slot Filled";
+        doublePrice += 1.0;
+        slotindex1price = doublePrice.toString();
+        slotColor = Colors.green;
+
+      });
+    }
+    else if(chartData1[9] > 20){
+      setState(() {
+        slotindex1text = "Slot Empty";
+        slotColor = Colors.grey;
+      });
+    }
+
+    print(chartData1);
   }
 
 
@@ -85,12 +114,21 @@ class _StatusScreenState extends State<StatusScreen> {
   Future<void> fetchDistance() async {
     final response = await http
         .get(Uri.parse(
-        "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/parkingdistance.json"));
+        "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/slotindex1/parkingdistance.json"));
     int distance = json.decode(response.body);
     return distance;
     // print(distance);
   }
 
+
+  Future<void> fetchStatus() async {
+    final response = await http
+        .get(Uri.parse(
+        "https://parkspace-242a3-default-rtdb.asia-southeast1.firebasedatabase.app/slotindex1/parkingstatus.json"));
+    String status = json.decode(response.body);
+    return status;
+    // print(distance);
+  }
 
   void chart() {
     print(chartData1);
@@ -219,7 +257,7 @@ class _StatusScreenState extends State<StatusScreen> {
                             padding: EdgeInsets.only(bottom: 6),
 
                             child: Text(
-                              "Parking Slot 1",
+                              "Alex's parking slot",
                               style: TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.black87,
@@ -268,8 +306,8 @@ class _StatusScreenState extends State<StatusScreen> {
                                       ),
                                       SizedBox(width: 10,),
                                       Text(
-                                        "Slot Filled",
-                                        style: whiteSubHeadingTextStyle.copyWith(color: Colors.green, fontSize: 14),
+                                        "$slotindex1text",
+                                        style: whiteSubHeadingTextStyle.copyWith(color: slotColor, fontSize: 14),
                                       ),
                                     ],
                                   ),
@@ -279,7 +317,7 @@ class _StatusScreenState extends State<StatusScreen> {
 
                                     children: [
                                       Text(
-                                        "₹ 106.20"
+                                        "₹ $slotindex1price"
                                       ),
                                       SizedBox(width: 10,),
                                       Icon(
