@@ -32,17 +32,11 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
           markerId: MarkerId(tappedPoint.toString()),
           position: tappedPoint,
           icon: mapMarker,
-
-
         ),
-
-
       );
-
     });
-
-    
   }
+
 
 
 
@@ -102,8 +96,6 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
           markers: Set.from(myMarkers),
 
           onTap: _handleTap,
-
-
 
         ),
       ),

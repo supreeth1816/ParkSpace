@@ -15,7 +15,6 @@ class _StartScreenState extends State<StartScreen> {
   final auth = FirebaseAuth.instance;
 
 
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
